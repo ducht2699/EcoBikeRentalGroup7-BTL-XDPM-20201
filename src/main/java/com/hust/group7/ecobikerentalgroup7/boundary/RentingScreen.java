@@ -50,14 +50,25 @@ public class RentingScreen extends javax.swing.JFrame {
 
         DefaultTableModel model = (DefaultTableModel) rentingBikeTable.getModel();
         System.out.println("set Model here");
-        model.setValueAt(bike.getLicensePlate(), 0, 1);
+        model.setValueAt(bike.getName(), 0, 1);
         model.setValueAt(bike.getType(), 1, 1);
-        model.setValueAt(bike.getBattery(), 2, 1);
-        model.setValueAt(bike.getBrand(), 3, 1);
-        model.setValueAt(bike.getModel(), 4, 1);
-        model.setValueAt(bike.getStatus(), 5, 1);
-        model.setValueAt(bike.getValue(), 6, 1);
-        model.setValueAt(transaction.getStartTime(), 7, 1);
+        model.setValueAt(bike.getWeight(), 2, 1);
+        model.setValueAt(bike.getLicensePlate(), 3, 1);
+        model.setValueAt(bike.getManufacturingDate(), 4, 1);
+        model.setValueAt(bike.getProducer(), 5, 1);
+        model.setValueAt(bike.getBateryPercentage(), 6, 1);
+        model.setValueAt(bike.getLoadCycles(), 7, 1);
+        model.setValueAt(transaction.getStartTime(), 8, 1);
+        model.setValueAt(bike.getBarcode(), 9, 1);
+        
+        //TODO: set sattion name
+        model.setValueAt(bike.getStationId(), 11, 1);
+        if (bike.getStatus() == 0) {
+            model.setValueAt("Available", 11, 1);
+        } else {
+            model.setValueAt("Renting", 11, 1);
+        }
+        
 
         String startTimeString = transaction.getStartTime();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -129,15 +140,19 @@ public class RentingScreen extends javax.swing.JFrame {
 
         rentingBikeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"License Plates", null},
+                {"Name", null},
                 {"Bike Type", null},
-                {"Battery", null},
-                {"Brand", null},
-                {"Model", null},
+                {"Weight", null},
+                {"License Plate", null},
+                {"Manufacturing Date", null},
+                {"Producer", null},
+                {"Battery Percentage", null},
+                {"Load Cycles", null},
+                {"Time remaining", null},
+                {"Barcode", null},
+                {"Station", null},
                 {"Status", null},
-                {"Value Bike", null},
-                {"Start Time", null},
-                {"Current Payment", null}
+                {null, null}
             },
             new String [] {
                 "Name", "Value"

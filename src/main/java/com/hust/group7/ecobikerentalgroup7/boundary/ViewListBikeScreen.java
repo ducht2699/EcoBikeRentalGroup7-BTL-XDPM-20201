@@ -240,37 +240,37 @@ private void sortTable() {
 
 
     private void rentBikeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentBikeBtnActionPerformed
-//        
-        int column = 1;
-        int row = listBikeTable.getSelectedRow();
-        if (row < 0) {
-            JOptionPane.showMessageDialog(this, "You have not choose station");
-        } else {
-            String value = listBikeTable.getModel().getValueAt(row, column).toString();
-
-            arrBike.forEach((Bike b) -> {
-                if (b.getLicensePlate().equals(value)) {
-                    passBike = b;
-                }
-            });
-            String sqlGetDockingPoint = "select * from docking_lock where lock_id='"+passBike.getLockId()+"'";
-            ResultSet rs;
-            try {
-                rs = db.query(sqlGetDockingPoint);
-                dp = new DockingPoint(0, 0, 0, "");
-                while(rs.next()) {
-                    System.out.println("barcode passing : " + rs.getString("bar_code"));
-                    dp.setBarCode(rs.getString("bar_code"));
-                    dp.setLockId(rs.getInt("lock_id"));
-                    dp.setStationId(rs.getInt("station_id"));
-                    dp.setStatus(rs.getInt("status"));
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ViewListBikeScreen.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            MainEntry.move(this, new RentBikeScreen(user, dp, backScreen));
-            System.out.println("value: " + value);;
-        }
+////        
+//        int column = 1;
+//        int row = listBikeTable.getSelectedRow();
+//        if (row < 0) {
+//            JOptionPane.showMessageDialog(this, "You have not choose station");
+//        } else {
+//            String value = listBikeTable.getModel().getValueAt(row, column).toString();
+//
+//            arrBike.forEach((Bike b) -> {
+//                if (b.getLicensePlate().equals(value)) {
+//                    passBike = b;
+//                }
+//            });
+//            String sqlGetDockingPoint = "select * from docking_lock where lock_id='"+passBike.getLockId()+"'";
+//            ResultSet rs;
+//            try {
+//                rs = db.query(sqlGetDockingPoint);
+//                dp = new DockingPoint(0, 0, 0, "");
+//                while(rs.next()) {
+//                    System.out.println("barcode passing : " + rs.getString("bar_code"));
+//                    dp.setBarCode(rs.getString("bar_code"));
+//                    dp.setLockId(rs.getInt("lock_id"));
+//                    dp.setStationId(rs.getInt("station_id"));
+//                    dp.setStatus(rs.getInt("status"));
+//                }
+//            } catch (SQLException ex) {
+//                Logger.getLogger(ViewListBikeScreen.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            MainEntry.move(this, new RentBikeScreen(user, dp, backScreen));
+//            System.out.println("value: " + value);;
+//        }
     }//GEN-LAST:event_rentBikeBtnActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed

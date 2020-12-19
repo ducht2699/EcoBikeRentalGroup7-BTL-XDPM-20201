@@ -7,7 +7,6 @@ package com.hust.group7.ecobikerentalgroup7.boundary;
 
 import com.hust.group7.ecobikerentalgroup7.DataBase;
 import com.hust.group7.ecobikerentalgroup7.Entity.Bike;
-import com.hust.group7.ecobikerentalgroup7.Entity.DockingPoint;
 import com.hust.group7.ecobikerentalgroup7.Entity.Transaction;
 import com.hust.group7.ecobikerentalgroup7.Entity.User;
 import com.hust.group7.ecobikerentalgroup7.MainEntry;
@@ -28,16 +27,14 @@ public class ReturnBikeScreen extends javax.swing.JFrame {
     private RentBikeController rbc;
     private JFrame backScreen;
     private User user;
-    private DockingPoint dp;
     private Transaction transaction;
     /**
      * Creates new form RentBikeScreen
      */
-    public ReturnBikeScreen(Transaction transaction, Bike bike, User user, DockingPoint dp, JFrame backScreen) {
+    public ReturnBikeScreen(Transaction transaction, Bike bike, User user, JFrame backScreen) {
         initComponents();
         this.backScreen = backScreen;
         this.user = user;
-        this.dp = dp;
         this.bike = bike;
         this.transaction = transaction;
         try {
@@ -53,10 +50,11 @@ public class ReturnBikeScreen extends javax.swing.JFrame {
         System.out.println("set Model here");
         model.setValueAt(bike.getLicensePlate(), 0, 1); 
         model.setValueAt(bike.getType(), 1, 1);
-        model.setValueAt(bike.getModel(), 2, 1);
+        model.setValueAt(bike.getName(), 2, 1);
         model.setValueAt(transaction.getStartTime(), 3, 1);
         model.setValueAt(transaction.getEndTime(), 4, 1);
-        model.setValueAt("helelo", 5, 1);
+        model.setValueAt(transaction.getDescription(), 5, 1);
+        model.setValueAt(transaction.getDeposit(), 6, 1);
         System.out.println(System.getProperty("user.dir") + bike.getImage());
         imageCodePanel.showImage(new File(bike.getImage()));
         imageCodePanel.repaint();
@@ -116,10 +114,11 @@ public class ReturnBikeScreen extends javax.swing.JFrame {
             new Object [][] {
                 {"License plates", null},
                 {"Bike type", null},
-                {"Model", null},
+                {"Name", null},
                 {"Time Start Rent", null},
                 {"Time Finish Rent", null},
-                {"Total Time Operation", null}
+                {"Description", null},
+                {"Price", null}
             },
             new String [] {
                 "Name", "Value"
@@ -128,16 +127,9 @@ public class ReturnBikeScreen extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         bikeInfoTable.setColumnSelectionAllowed(true);
@@ -232,7 +224,7 @@ public class ReturnBikeScreen extends javax.swing.JFrame {
     private void requestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestButtonActionPerformed
         PaymentScreen pm;
         try {
-            pm = new PaymentScreen(user, bike, dp, this);
+            pm = new PaymentScreen(user, bike, this);
             MainEntry.move(this, pm);
         } catch (SQLException ex) {
             Logger.getLogger(ReturnBikeScreen.class.getName()).log(Level.SEVERE, null, ex);

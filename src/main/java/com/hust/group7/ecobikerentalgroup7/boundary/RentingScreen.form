@@ -93,17 +93,21 @@
         <Component class="javax.swing.JTable" name="rentingBikeTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="2" rowCount="9">
+              <Table columnCount="2" rowCount="13">
                 <Column editable="true" title="Name" type="java.lang.String">
-                  <Data value="License Plates"/>
+                  <Data value="Name"/>
                   <Data value="Bike Type"/>
-                  <Data value="Battery"/>
-                  <Data value="Brand"/>
-                  <Data value="Model"/>
+                  <Data value="Weight"/>
+                  <Data value="License Plate"/>
+                  <Data value="Manufacturing Date"/>
+                  <Data value="Producer"/>
+                  <Data value="Battery Percentage"/>
+                  <Data value="Load Cycles"/>
+                  <Data value="Time remaining"/>
+                  <Data value="Barcode"/>
+                  <Data value="Station"/>
                   <Data value="Status"/>
-                  <Data value="Value Bike"/>
-                  <Data value="Start Time"/>
-                  <Data value="Current Payment"/>
+                  <Data value="null"/>
                 </Column>
                 <Column editable="true" title="Value" type="java.lang.String"/>
               </Table>

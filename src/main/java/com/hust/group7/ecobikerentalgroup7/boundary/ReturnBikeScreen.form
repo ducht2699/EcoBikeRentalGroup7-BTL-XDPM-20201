@@ -136,16 +136,17 @@
         <Component class="javax.swing.JTable" name="bikeInfoTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="2" rowCount="6">
-                <Column editable="false" title="Name" type="java.lang.String">
+              <Table columnCount="2" rowCount="7">
+                <Column editable="true" title="Name" type="java.lang.String">
                   <Data value="License plates"/>
                   <Data value="Bike type"/>
-                  <Data value="Model"/>
+                  <Data value="Name"/>
                   <Data value="Time Start Rent"/>
                   <Data value="Time Finish Rent"/>
-                  <Data value="Total Time Operation"/>
+                  <Data value="Description"/>
+                  <Data value="Price"/>
                 </Column>
-                <Column editable="false" title="Value" type="java.lang.String"/>
+                <Column editable="true" title="Value" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

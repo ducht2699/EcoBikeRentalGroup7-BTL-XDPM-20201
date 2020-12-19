@@ -13,7 +13,7 @@ import com.hust.group7.ecobikerentalgroup7.Entity.Bike;
 import com.hust.group7.ecobikerentalgroup7.Entity.User;
 import com.hust.group7.ecobikerentalgroup7.GenerateQRCode;
 import com.hust.group7.ecobikerentalgroup7.MainEntry;
-import com.hust.group7.ecobikerentalgroup7.boundary.RentBikeScreen;
+import com.hust.group7.ecobikerentalgroup7.boundary.RentingScreen;
 import com.hust.group7.ecobikerentalgroup7.boundary.ReturnBikeScreen;
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -107,7 +107,7 @@ public class RentBikeController {
             route.setVisible(true);
             screenBefore.setVisible(false);
         } catch (Exception ex) {
-            Logger.getLogger(RentBikeScreen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RentingScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
