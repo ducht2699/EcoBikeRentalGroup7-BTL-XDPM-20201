@@ -96,9 +96,9 @@ public class AdminAddStation extends javax.swing.JFrame {
 
         jLabel2.setText("Address :");
 
-        jLabel3.setText("Area :");
+        jLabel3.setText("Distance :");
 
-        jLabel4.setText("Location code :");
+        jLabel4.setText("Time :");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("ADD STATION");
@@ -175,16 +175,16 @@ public class AdminAddStation extends javax.swing.JFrame {
     private void btnAddStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStationActionPerformed
         //create new form add station
         String stationName = tfStationName.getText( );
-        String stationArea = tfArea.getText();
+        String distanceToWalk = tfArea.getText();
         String stationAddress = tfAddress.getText();
-        String locationCode = tfLocationCode.getText();
-        String[] arg = {stationName, stationAddress, stationArea, locationCode};
+        String timeToWalk = tfLocationCode.getText();
+        String[] arg = {stationName, stationAddress, distanceToWalk, timeToWalk};
         
-        if (stationName.isEmpty() || stationArea.isEmpty() || stationAddress.isEmpty() || locationCode.isEmpty()) {
+        if (stationName.isEmpty() || distanceToWalk.isEmpty() || stationAddress.isEmpty() || timeToWalk.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Fill in all blank!");
         } else {
-            String sql = "INSERT INTO `station` (`station_id`, `station_name`, `address`, `area`, `location_code`) VALUES\n" +
-"(null, '" + stationName +"', '" + stationAddress + "', " + stationArea + ", '" + locationCode +"')";
+            String sql = "INSERT INTO `stations` (`id`, `name`, `address`, `number_of_docks`, `distance_to_walk`, `time_to_walk`) VALUES\n" +
+"(null, '" + stationName +"', '" + stationAddress + "', '"+ 20 +"', '" + distanceToWalk + "', '" + timeToWalk +"')";
             try {
                 db.insert(sql);
                 JOptionPane.showMessageDialog(this, "Inserted!");

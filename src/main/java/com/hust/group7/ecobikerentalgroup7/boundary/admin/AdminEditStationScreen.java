@@ -213,7 +213,7 @@ public class AdminEditStationScreen extends javax.swing.JFrame {
         String stationAddress = model.getValueAt(1, 1).toString();
         String stationArea = model.getValueAt(2, 1).toString();
 
-        String sql = "UPDATE stations SET name = '" + stationName + "', address = '" + stationAddress + "', area = " + stationArea + " WHERE id = " + station.getStationId();
+        String sql = "UPDATE stations SET name = '" + stationName + "', address = '" + stationAddress + "'" + " WHERE id = " + station.getStationId();
 
         try {
             db.update(sql);
