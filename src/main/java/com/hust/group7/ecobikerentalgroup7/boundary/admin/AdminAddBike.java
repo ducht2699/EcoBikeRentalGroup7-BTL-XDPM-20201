@@ -9,7 +9,6 @@ package com.hust.group7.ecobikerentalgroup7.boundary.admin;
 import com.hust.group7.ecobikerentalgroup7.Constants;
 import com.hust.group7.ecobikerentalgroup7.DataBase;
 import com.hust.group7.ecobikerentalgroup7.Entity.Bike;
-import com.hust.group7.ecobikerentalgroup7.Entity.DockingPoint;
 import com.hust.group7.ecobikerentalgroup7.Entity.Station;
 import com.hust.group7.ecobikerentalgroup7.Entity.User;
 
@@ -61,15 +60,14 @@ public class AdminAddBike extends javax.swing.JFrame {
     public void addStation() {
         arrStation = new ArrayList<>();
         try {
-            String sqlString = "select * from station";
+            String sqlString = "select * from stations";
             ResultSet rs = db.query(sqlString);
             while (rs.next()) {
-                Station station = new Station(0, 0, 0, 0, "", "", "");
+                Station station = new Station();
                 station.setAddress(rs.getString("address"));
-                station.setStationId(rs.getInt("station_id"));
-                station.setStationName(rs.getString("station_name"));
-                station.setStationArea(rs.getInt("area"));
-                station.setLocationCode(rs.getString("location_code"));
+                station.setStationId(rs.getInt("id"));
+                station.setName(rs.getString("name"));
+                station.setDistance(rs.getInt("distance_to_walk"));
                 arrStation.add(station);
             }
         } catch (Exception e) {
@@ -77,7 +75,7 @@ public class AdminAddBike extends javax.swing.JFrame {
         }
 
         for (Station x : arrStation) {
-            cbbStation.addItem(x.getStationName());
+            cbbStation.addItem(x.getName());
         }
     }
 
@@ -327,7 +325,7 @@ public class AdminAddBike extends javax.swing.JFrame {
         }
 
         //add Bike
-        sql = "INSERT INTO `bike` (`bike_id`, `station_id`, `lock_id`, `plate_license`, `brand`, `model`, `battery`, `operation_date`, `type`, `status`, `value_of_bike`, `image`) VALUES\n"
+        sql = "INSERT INTO `bikes` (`bike_id`, `station_id`, `lock_id`, `plate_license`, `brand`, `model`, `battery`, `operation_date`, `type`, `status`, `value_of_bike`, `image`) VALUES\n"
                 + "(null, " + getStationIDByName(station)
                 + ", " + lockID
                 + ", '" + plateLiscense
@@ -359,7 +357,7 @@ public class AdminAddBike extends javax.swing.JFrame {
     private int getStationIDByName(String stationName) {
         int ID = -1;
         for (Station x : arrStation) {
-            if (x.getStationName().equals(stationName)) {
+            if (x.getName().equals(stationName)) {
                 ID = x.getStationId();
                 break;
             }

@@ -34,7 +34,7 @@ public class AdminEditStationScreen extends javax.swing.JFrame {
         initComponents();
         this.station = station;
         this.user = user;
-        System.out.println("station name info: " + station.getStationName());
+        System.out.println("station name info: " + station.getName());
         this.backScreen = backScreen;
         showStationInfo();
         imageMap.showImage(new File("station.jpg"));
@@ -44,10 +44,10 @@ public class AdminEditStationScreen extends javax.swing.JFrame {
     private void showStationInfo() {
         DefaultTableModel model = (DefaultTableModel) stationInfoTable.getModel();
         System.out.println("set model infor");
-        model.setValueAt(station.getStationName(), 0, 1);
+        model.setValueAt(station.getName(), 0, 1);
         model.setValueAt(station.getAddress(), 1, 1);
-        model.setValueAt(station.getStationArea(), 2, 1);
-        stationNameTitle.setText(station.getStationName());
+        model.setValueAt(station.getNumberOfEmptyDocks(), 2, 1);
+        stationNameTitle.setText(station.getName());
 
         model.fireTableDataChanged();
     }
@@ -213,7 +213,7 @@ public class AdminEditStationScreen extends javax.swing.JFrame {
         String stationAddress = model.getValueAt(1, 1).toString();
         String stationArea = model.getValueAt(2, 1).toString();
 
-        String sql = "UPDATE station SET station_name = '" + stationName + "', address = '" + stationAddress + "', area = " + stationArea + " WHERE station_id = " + station.getStationId();
+        String sql = "UPDATE stations SET name = '" + stationName + "', address = '" + stationAddress + "', area = " + stationArea + " WHERE id = " + station.getStationId();
 
         try {
             db.update(sql);
