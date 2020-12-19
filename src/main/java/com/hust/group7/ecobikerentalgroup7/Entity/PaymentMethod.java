@@ -22,14 +22,14 @@ public class PaymentMethod {
 	
 	private float remainingAmount; // số tiền còn lại trong thẻ
 	
-	private String userId;
+	private int userId;
 	
 	public PaymentMethod() {
 		
 	}
 
 	public PaymentMethod(int methodId, String cardholderName, String cardNumber, String issuingBank,
-			String expirationDate, String securityCode, float remainingAmount, String userId) {
+			String expirationDate, String securityCode, float remainingAmount, int userId) {
 		super();
 		this.methodId = methodId;
 		this.cardholderName = cardholderName;
@@ -97,11 +97,11 @@ public class PaymentMethod {
 		this.remainingAmount = remainingAmount;
 	}
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
     

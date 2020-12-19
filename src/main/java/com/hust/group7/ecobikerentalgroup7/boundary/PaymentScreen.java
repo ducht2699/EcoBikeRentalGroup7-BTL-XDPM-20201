@@ -8,7 +8,6 @@ package com.hust.group7.ecobikerentalgroup7.boundary;
 import com.hust.group7.ecobikerentalgroup7.Constants;
 import com.hust.group7.ecobikerentalgroup7.DataBase;
 import com.hust.group7.ecobikerentalgroup7.Entity.Bike;
-import com.hust.group7.ecobikerentalgroup7.Entity.DockingPoint;
 import com.hust.group7.ecobikerentalgroup7.Entity.PaymentMethod;
 import com.hust.group7.ecobikerentalgroup7.Entity.Transaction;
 import com.hust.group7.ecobikerentalgroup7.Entity.User;
@@ -46,17 +45,15 @@ public class PaymentScreen extends javax.swing.JFrame {
     private static HttpURLConnection connection;
     private Bike bike;
     private User user;
-    private DockingPoint dp;
     private Transaction transaction;
 
-    public PaymentScreen(User user, Bike bike, DockingPoint dp, JFrame backScreen) throws SQLException, Exception {
+    public PaymentScreen(User user, Bike bike, JFrame backScreen) throws SQLException, Exception {
         initComponents();
         rbc = new RentBikeController();
         this.db = new DataBase();
         this.backScreen = backScreen;
         this.bike = bike;
         this.user = user;
-        this.dp = dp;
         rbc.showInfoDeposit(bike, valueBikeModel, valueBike, valueDeposit);
         getPayemntMethod();
     }
@@ -70,13 +67,15 @@ public class PaymentScreen extends javax.swing.JFrame {
             nameMethod = new String[size];
             int i = 0;
             while (rs.next()) {
-                paymentMethod[i] = new PaymentMethod("", "", "", 0, 0);
-                nameMethod[i] = rs.getString("method_name");
-                paymentMethod[i].setNameMethod(rs.getString("method_name"));
-                paymentMethod[i].setCvvCode(rs.getInt("cvv_code"));
-                paymentMethod[i].setDateExpired(rs.getInt("date_expire"));
-                paymentMethod[i].setCardCode(rs.getString("card_code"));
-                paymentMethod[i].setNameOwner(rs.getString("owner"));
+                paymentMethod[i] = new PaymentMethod();
+                nameMethod[i] = rs.getString("issuing_bank");
+                paymentMethod[i].setIssuingBank(rs.getString("issuing_bank"));
+                paymentMethod[i].setCardholderName(rs.getString("cardholder_name"));
+                paymentMethod[i].setCardNumber(rs.getString("card_number"));
+                paymentMethod[i].setExpirationDate(rs.getString("expiration_date"));
+               	paymentMethod[i].setRemainingAmount(rs.getFloat("remaining_amount"));
+                paymentMethod[i].setUserId(rs.getInt("user_id"));
+      			paymentMethod[i].setMethodId(rs.getInt("id"));
                 i++;
             }
             depositComboBox.setModel(new DefaultComboBoxModel(nameMethod));
@@ -268,9 +267,9 @@ public class PaymentScreen extends javax.swing.JFrame {
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         for (PaymentMethod paymentMethod1 : paymentMethod) {
-            if (paymentMethod1.getNameMethod().equals(depositComboBox.getSelectedItem())) {
+            if (paymentMethod1.getIssuingBank().equals(depositComboBox.getSelectedItem())) {
                 if (confirmCheckBox.isSelected()) {
-                    String transactionContent = "Thanh Toan First Group 11";
+                    String transactionContent = "Thanh Toan First Group 7";
                     int amount = 100;
                     String command = "pay";
                     LocalDateTime myDateObj = LocalDateTime.now();
@@ -280,10 +279,10 @@ public class PaymentScreen extends javax.swing.JFrame {
                     sb.append("{"
                             + "\"secretKey\":\"" + Constants.SECRET_KEY + "\","
                             + "\"transaction\":{"
-                            + "\"cardCode\":\"" + paymentMethod1.getCardCode() + "\","
-                            + "\"owner\":\"" + paymentMethod1.getNameOwner() + "\","
-                            + "\"cvvCode\":\"" + paymentMethod1.getCvvCode() + "\","
-                            + "\"dateExpired\":\"" + paymentMethod1.getDateExpired() + "\","
+                            + "\"cardCode\":\"" + paymentMethod1.getCardNumber() + "\","
+                            + "\"owner\":\"" + paymentMethod1.getCardholderName() + "\","
+                            + "\"cvvCode\":\"" + paymentMethod1.getSecurityCode() + "\","
+                            + "\"dateExpired\":\"" + paymentMethod1.getExpirationDate() + "\","
                             + "\"command\":\"" + command + "\","
                             + "\"transactionContent\":\"" + transactionContent + "\","
                             + "\"amount\":" + amount + ","
@@ -314,10 +313,10 @@ public class PaymentScreen extends javax.swing.JFrame {
                         entity.append("{"
                                 + "\"version\":\"" + Constants.APP_VERSION + "\","
                                 + "\"transaction\":{"
-                                + "\"cardCode\":\"" + paymentMethod1.getCardCode() + "\","
-                                + "\"owner\":\"" + paymentMethod1.getNameOwner() + "\","
-                                + "\"cvvCode\":\"" + paymentMethod1.getCvvCode() + "\","
-                                + "\"dateExpired\":\"" + paymentMethod1.getDateExpired() + "\","
+                                + "\"cardCode\":\"" + paymentMethod1.getCardNumber() + "\","
+                                + "\"owner\":\"" + paymentMethod1.getCardholderName() + "\","
+                                + "\"cvvCode\":\"" + paymentMethod1.getSecurityCode() + "\","
+                                + "\"dateExpired\":\"" + paymentMethod1.getExpirationDate() + "\","
                                 + "\"command\":\"" + command + "\","
                                 + "\"transactionContent\":\"" + transactionContent + "\","
                                 + "\"amount\":" + amount + ","
@@ -332,32 +331,41 @@ public class PaymentScreen extends javax.swing.JFrame {
                             result = EntityUtils.toString(response.getEntity());
                         }
                         System.out.println(result);
-                        String sqlSetStatusBike = "UPDATE bike SET status = '0' WHERE bike_id = '" + bike.getBikeId() + "'";
-                        String sqlSetStatusUser = "UPDATE user SET status = '0' WHERE user_id = '" + user.getUserId() + "'";
-                        System.out.println("lockid===============" + dp.getLockId());
-                        String sqlSetStatusDockingPoint = "UPDATE docking_lock SET status = '1' WHERE lock_id = '" + dp.getLockId() + "'";
+                        String sqlSetStatusBike = "UPDATE bikes SET status = '0' WHERE id = '" + bike.getBikeId() + "'";
+                        String sqlSetStatusUser = "UPDATE users SET status = '0' WHERE id = '" + user.getUserId() + "'";
+                       
 //                        String sqlInsertTransaction = "INSERT INTO transaction VALUES (NULL, '" + bike.getBikeId() + "', '" + user.getUserId() + "', current_timestamp(), NULL, '1', '50004');";
 
                         System.out.println(sqlSetStatusBike);
                         int pk = db.update(sqlSetStatusBike);
                         int pk2 = db.update(sqlSetStatusUser);
-                        int pk4 = db.update(sqlSetStatusDockingPoint);
+                       // int pk4 = db.update(sqlSetStatusDockingPoint);
 //                        ResultSet rs3 = db.insert(sqlInsertTransaction);
 //                        rs3.next();
 //                        int pk3 = rs3.getInt(1);
                         System.out.println("pk: " + pk);
                         System.out.println("pk2: " + pk2);
 //                        System.out.println("pk3: " + pk3);
-                        System.out.println("pk4: " + pk4);
-                        if (pk > 0 && pk2 > 0 && pk4 > 0) {
+                       // System.out.println("pk4: " + pk4);
+                        if (pk > 0 && pk2 > 0) {
                             bike.setStatus(1);
                             user.setStatus(1);
-                            dp.setStatus(0);
+                            //dp.setStatus(0);
                             String sqlGetTransaction = "SELECT * FROM transaction WHERE user_id = '" + user.getUserId() + "'";
                             ResultSet rs = db.query(sqlGetTransaction);
                             while (rs.next()) {
-                                transaction = new Transaction(rs.getString("start_time"), rs.getString("end_time"), rs.getInt("bike_id"), rs.getInt("user_id"), rs.getInt("transaction_id"), rs.getInt("status"), rs.getInt("deposit"));
-                                MainEntry.move(this, new RentingScreen(transaction, user, bike, this));
+                            	transaction = new Transaction();
+                    			transaction.setTransactionId(rs.getInt("id"));
+                    			transaction.setBikeId(rs.getInt("bike_id"));
+                    			transaction.setUserId(rs.getInt("user_id"));
+                    			transaction.setStartTime(rs.getString("start_time"));
+                    			transaction.setEndTime(rs.getString("end_time"));
+                    			transaction.setPaymentMethodId(rs.getInt("payment_method_id"));
+                    			transaction.setStatus(rs.getInt("status"));
+                    			transaction.setDescription(rs.getString("description"));
+                    			transaction.setDeposit(rs.getFloat("deposit"));
+                    			
+                    			MainEntry.move(this, new RentingScreen(transaction, user, bike, this));
                             }
                         } else {
                             JOptionPane.showMessageDialog(this, "update fail");

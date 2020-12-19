@@ -53,27 +53,38 @@ public class HomeScreen extends javax.swing.JFrame {
 
     private void getTransaction() throws SQLException {
         int bikeId;
-        String sqlGetTransaction = "SELECT * FROM transaction WHERE user_id = '" + user.getUserId() + "'";
-        ResultSet rs = db.query(sqlGetTransaction);
+        String sqlGetTransaction = "SELECT * FROM transactions WHERE user_id = '" + user.getUserId() + "'";
+		ResultSet rs = db.query(sqlGetTransaction);
         while (rs.next()) {
-            transaction = new Transaction(rs.getString("start_time"), rs.getString("end_time"), rs.getInt("bike_id"), rs.getInt("user_id"), rs.getInt("transaction_id"), rs.getInt("status"), rs.getInt("deposit"));
-            String sqlGetBike = "SELECT * FROM bike WHERE bike_id = '" + transaction.getBikeId() + "'";
-            System.out.println("bike_id_transaction===>" + transaction.getBikeId());
-            ResultSet rs2 = db.query(sqlGetBike);
-            bike = new Bike(0, 0, 0, 0, "", "", "", "", "", "", 1);
-            while (rs2.next()) {
-                bike.setBikeId(rs2.getInt("bike_id"));
-                bike.setStationId(rs2.getInt("station_id"));
-                bike.setLockId(rs2.getInt("lock_id"));
-                bike.setValue(rs2.getInt("value_of_bike"));
-                bike.setLicensePlate(rs2.getString("plate_license"));
-                bike.setModel(rs2.getString("model"));
-                bike.setType(rs2.getString("type"));
-                bike.setBattery(rs2.getString("battery"));
-                bike.setBrand(rs2.getString("brand"));
-                bike.setImage(rs2.getString("image"));
-                bike.setStatus(rs2.getInt("status"));
-            }
+        	transaction = new Transaction();
+			transaction.setTransactionId(rs.getInt("id"));
+			transaction.setBikeId(rs.getInt("bike_id"));
+			transaction.setUserId(rs.getInt("user_id"));
+			transaction.setStartTime(rs.getString("start_time"));
+			transaction.setEndTime(rs.getString("end_time"));
+			transaction.setPaymentMethodId(rs.getInt("payment_method_id"));
+			transaction.setStatus(rs.getInt("status"));
+			transaction.setDescription(rs.getString("description"));
+			transaction.setDeposit(rs.getFloat("deposit"));
+			
+			String sqlGetBike = "SELECT * FROM bikes WHERE id = '" + transaction.getBikeId() + "'";
+			System.out.println("bike_id_transaction===>" + transaction.getBikeId());
+			ResultSet rs2 = db.query(sqlGetBike);
+			bike = new Bike();
+			while (rs2.next()) {
+				Bike bike = new Bike();
+				bike.setBikeId(rs2.getInt("id"));
+				bike.setName(rs2.getString("name"));
+				bike.setType(rs2.getString("type"));
+				bike.setWeight(rs2.getFloat("weight"));
+				bike.setLicensePlate(rs2.getString("license_plate"));
+				bike.setManufacturingDate(rs2.getString("type"));
+				bike.setProducer(rs2.getString("producer"));
+				bike.setBarcode(rs2.getString("barcode"));
+				bike.setStationId(rs2.getInt("station_id"));
+				bike.setImage(rs2.getString("image"));
+				bike.setStatus(rs2.getInt("status"));
+			}
         }
     }
 

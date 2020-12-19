@@ -56,18 +56,19 @@ public class ViewListBikeScreen extends javax.swing.JFrame {
             ResultSet rs = db.query(sqlString);
             while (rs.next()) {
                 Bike bike = new Bike();
-                bike.setBikeId(rs.getInt("id"));
-                bike.setName(rs.getString("name"));
-                bike.setType(rs.getString("type"));
-                bike.setWeight(rs.getFloat("weight"));
                 
-                bike.setStationId(rs.getInt("station_id"));
-                bike.setLicensePlate(rs.getString("plate_license"));
-             
-                bike.setType(rs.getString("type"));
-               
-                bike.setImage(rs.getString("image"));
-                bike.setStatus(rs.getInt("status"));
+                bike.setBikeId(rs.getInt("id"));
+				bike.setName(rs.getString("name"));
+				bike.setType(rs.getString("type"));
+				bike.setWeight(rs.getFloat("weight"));
+				bike.setLicensePlate(rs.getString("license_plate"));
+				bike.setManufacturingDate(rs.getString("type"));
+				bike.setProducer(rs.getString("producer"));
+				bike.setBarcode(rs.getString("barcode"));
+				bike.setStationId(rs.getInt("station_id"));
+				bike.setImage(rs.getString("image"));
+				bike.setStatus(rs.getInt("status"));
+				
                 arrBike.add(bike);
             }
         } catch (Exception e) {
@@ -78,8 +79,8 @@ public class ViewListBikeScreen extends javax.swing.JFrame {
         for (int i = 0; i < arrBike.size(); i++) {
             Bike b = arrBike.get(i);
             String status = b.getStatus() == 0 ? "Available" : "Busy";
-            model.addRow(new Object[]{i, b.getLicensePlate(), b.getModel(), b.getType(),
-                b.getLockId(), b.getBattery() + " %", status, b.getValue() + Constants.MONEY_UNIT});
+            model.addRow(new Object[] { i, b.getLicensePlate(), b.getName(), b.getType(), b.getStationId(),
+					b.getBarcode(), status, b.getProducer() + Constants.MONEY_UNIT });
         }
         model.fireTableDataChanged();
     }
@@ -121,7 +122,7 @@ public class ViewListBikeScreen extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Plate License", "Model", "Type", "Docking Point", "Battery", "Status", "Value"
+                "STT", "Plate License", "Name", "Type", "Station ID", "Barcode", "Status", "Producer"
             }
         ) {
             Class[] types = new Class [] {

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class DataBase {
 
     private final int PORT = 3306;
-    private final String DB_NAME = "tkxdpm?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private final String DB_NAME = "tkxdpm_ver2?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private final String URL = "jdbc:mysql://localhost:" + PORT + "/" + DB_NAME;
     private final String USER = "root";
     private final String PASS = "";
