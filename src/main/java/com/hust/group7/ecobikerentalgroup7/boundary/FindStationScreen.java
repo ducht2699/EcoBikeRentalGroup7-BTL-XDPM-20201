@@ -76,7 +76,7 @@ public class FindStationScreen extends javax.swing.JFrame {
             System.out.println("num bike avail: " + numbikeAvailable);
             s.setNumberOfEmptyDocks(s.getNumberOfDocks()-numbikeAvailable);
 
-            model.addRow(new Object[]{i + 1, s.getName(), 100, s.getAddress(), s.getNumberOfEmptyDocks()});
+            model.addRow(new Object[]{i + 1, s.getName(), s.getDistance()+ " m", s.getAddress(), s.getNumberOfEmptyDocks()});
             System.out.println("add row" + s.getName());
         }
     }
@@ -152,7 +152,12 @@ public class FindStationScreen extends javax.swing.JFrame {
         buttonViewStationInfo.setText("View Station Info");
         buttonViewStationInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonViewStationInfoActionPerformed(evt);
+                try {
+					buttonViewStationInfoActionPerformed(evt);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -209,7 +214,7 @@ public class FindStationScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldSearchActionPerformed
 
-    private void buttonViewStationInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonViewStationInfoActionPerformed
+    private void buttonViewStationInfoActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_buttonViewStationInfoActionPerformed
         int column = 1;
         int row = stationListTable.getSelectedRow();
         if (row < 0) {

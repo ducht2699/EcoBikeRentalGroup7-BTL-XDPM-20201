@@ -7,6 +7,7 @@ package com.hust.group7.ecobikerentalgroup7.boundary;
 
 import com.hust.group7.ecobikerentalgroup7.Entity.Station;
 import com.hust.group7.ecobikerentalgroup7.Entity.User;
+import com.hust.group7.ecobikerentalgroup7.DataBase;
 import com.hust.group7.ecobikerentalgroup7.MainEntry;
 import com.hust.group7.ecobikerentalgroup7.boundary.ViewListBikeScreen;
 import java.io.File;
@@ -25,25 +26,30 @@ public class StationInfoScreen extends javax.swing.JFrame {
     private JFrame backScreen;
     private Station station;
     private User user;
+    private DataBase db;
 
-    public StationInfoScreen(JFrame backScreen, User user,  Station station) {
+    public StationInfoScreen(JFrame backScreen, User user,  Station station) throws SQLException {
         initComponents();
         this.station = station;
         this.user = user;
+        this.db = new DataBase();
         System.out.println("station name info: " + station.getName());
         this.backScreen = backScreen;
         showStationInfo();
         imageMap.showImage(new File("station.jpg"));
     }
 
-    private void showStationInfo() {
+    private void showStationInfo() throws SQLException {
         DefaultTableModel model = (DefaultTableModel) stationInfoTable.getModel();
+        String sqlGetBikeAvailable = "select * from bikes  where station_id='" + station.getStationId() + "' and status='0'";
+        int numbikeAvailable = db.getRow(sqlGetBikeAvailable);
         System.out.println("set model infor");
         model.setValueAt(station.getName(), 0, 1);
         model.setValueAt(station.getAddress(), 1, 1);
         model.setValueAt(station.getDistance()+ " m", 2, 1);
         model.setValueAt(station.getTime()+" minute", 3, 1);
         model.setValueAt(station.getNumberOfDocks(), 4, 1);
+        model.setValueAt(numbikeAvailable, 5, 1);
 
         model.fireTableDataChanged();
     }
@@ -79,7 +85,8 @@ public class StationInfoScreen extends javax.swing.JFrame {
                 {"Address", null},
                 {"Distance to station", null},
                 {"Walking-times", null},
-                {"Number of docks", null}
+                {"Number of docks", null},
+                {"Number bike Available",null}
             },
             new String [] {
                 "Name", "Value"
