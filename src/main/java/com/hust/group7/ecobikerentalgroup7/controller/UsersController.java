@@ -38,10 +38,10 @@ public class UsersController {
         System.out.println("Login here");
 
         try {
-            String sqlString = "Select * from user where username='" + username + "' and password='" + password + "'";
+            String sqlString = "Select * from users where username='" + username + "' and password='" + password + "'";
             ResultSet rs = db.query(sqlString);
             if (rs.next()) {
-                User user = new User(rs.getInt("user_id"), rs.getString("username"), rs.getInt("status"), rs.getInt("isAdmin"));
+                User user = new User(rs.getInt("id"), rs.getString("username"), rs.getInt("status"), rs.getInt("isAdmin"));
                 if (user.isAdmin() == 0) {
                     HomeScreen hc = new HomeScreen(user, backScreen);
                     MainEntry.move(backScreen, hc);
@@ -62,7 +62,7 @@ public class UsersController {
 
     public void handleRegister(JFrame backScreen, String userName, String name, String pass, String confirmPass) throws SQLException {
         if (pass.equals(confirmPass)) {
-            String sql = "INSERT INTO user (`user_id`, `name`, `username`, `password`, `status`, `isAdmin`) VALUES (null, '" + name + "', '" + userName + "', '" + pass + "', '0', '0');";
+            String sql = "INSERT INTO users (`id`, `name`, `username`, `password`, `status`, `isAdmin`) VALUES (null, '" + name + "', '" + userName + "', '" + pass + "', '0', '0');";
             db.insert(sql);
             LoginScreen hc = new LoginScreen();
             MainEntry.move(backScreen, hc);

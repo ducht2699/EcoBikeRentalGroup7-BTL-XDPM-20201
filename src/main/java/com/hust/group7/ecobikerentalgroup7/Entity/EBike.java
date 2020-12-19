@@ -2,6 +2,8 @@ package com.hust.group7.ecobikerentalgroup7.Entity;
 
 public class EBike extends Bike{
 	
+	/*
+	
 	private String bateryPercentage; //dung lượng pin hiện tại (%)
 	private String loadCycles; // Số lần sạc
 	private String timeRemaining; // Thời gian hết pin (giờ)
@@ -49,6 +51,6 @@ public class EBike extends Bike{
 		this.timeRemaining = timeRemaining;
 	}
 	
-	
+	*/
 	
 }

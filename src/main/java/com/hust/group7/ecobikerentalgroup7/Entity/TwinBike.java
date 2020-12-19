@@ -1,6 +1,9 @@
 package com.hust.group7.ecobikerentalgroup7.Entity;
 
 public class TwinBike extends Bike{
+	
+	/*
+	
 	public TwinBike() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -12,4 +15,5 @@ public class TwinBike extends Bike{
 		// TODO Auto-generated constructor stub
 	}
 
+	 */
 }

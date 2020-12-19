@@ -36,14 +36,13 @@ public class ViewListBikeScreen extends javax.swing.JFrame {
     private ArrayList<Bike> arrBike;
     private DataBase db;
     private Bike passBike;
-    private DockingPoint dp;
     private User user;
 
     public ViewListBikeScreen(JFrame backScreen, User user, Station station) throws SQLException {
         initComponents();
         this.station = station;
         stationName.setHorizontalAlignment(javax.swing.JLabel.CENTER);
-        stationName.setText(station.getStationName());
+        stationName.setText(station.getName());
         this.backScreen = backScreen;
         this.db = new DataBase();
         this.user = user;
@@ -54,19 +53,20 @@ public class ViewListBikeScreen extends javax.swing.JFrame {
     private void showListBike() {
         arrBike = new ArrayList<>();
         try {
-            String sqlString = "select * from bike where station_id = '" + station.getStationId() + "'";
+            String sqlString = "select * from bikes where station_id = '" + station.getStationId() + "'";
             ResultSet rs = db.query(sqlString);
             while (rs.next()) {
-                Bike bike = new Bike(0, 0, 0, 0, "", "", "", "", "", "", 1);
-                bike.setBikeId(rs.getInt("bike_id"));
-                bike.setStationId(rs.getInt("station_id"));
-                bike.setLockId(rs.getInt("lock_id"));
-                bike.setValue(rs.getInt("value_of_bike"));
-                bike.setLicensePlate(rs.getString("plate_license"));
-                bike.setModel(rs.getString("model"));
+                Bike bike = new Bike();
+                bike.setBikeId(rs.getInt("id"));
+                bike.setName(rs.getString("name"));
                 bike.setType(rs.getString("type"));
-                bike.setBattery(rs.getString("battery"));
-                bike.setBrand(rs.getString("brand"));
+                bike.setWeight(rs.getFloat("weight"));
+                
+                bike.setStationId(rs.getInt("station_id"));
+                bike.setLicensePlate(rs.getString("plate_license"));
+             
+                bike.setType(rs.getString("type"));
+               
                 bike.setImage(rs.getString("image"));
                 bike.setStatus(rs.getInt("status"));
                 arrBike.add(bike);
