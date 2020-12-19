@@ -13,11 +13,15 @@ public class Bike {
     private int stationId; // id bãi xe
     private String image; //ảnh
     private Cost cost; // giá tiền
+    private String bateryPercentage; //dung lượng pin hiện tại (%)
+	private String loadCycles; // Số lần sạc
+	private String timeRemaining; // Thời gian hết pin (giờ)
     
     public Bike() {}
 
 	public Bike(int bikeId, String name, String type, float weight, String licensePlate, String manufacturingDate,
-			String producer, String barcode, int status, int stationId, String image, Cost cost) {
+			String producer, String barcode, int status, int stationId, String image, Cost cost,
+			String bateryPercentage, String loadCycles, String timeRemaining) {
 		super();
 		this.bikeId = bikeId;
 		this.name = name;
@@ -31,6 +35,9 @@ public class Bike {
 		this.stationId = stationId;
 		this.image = image;
 		this.cost = cost;
+		this.bateryPercentage = bateryPercentage;
+		this.loadCycles = loadCycles;
+		this.timeRemaining = timeRemaining;
 	}
 
 	public int getBikeId() {
@@ -128,7 +135,30 @@ public class Bike {
 	public void setCost(Cost cost) {
 		this.cost = cost;
 	}
-    
+	public String getBateryPercentage() {
+		return bateryPercentage;
+	}
+
+	public void setBateryPercentage(String bateryPercentage) {
+		this.bateryPercentage = bateryPercentage;
+	}
+
+	public String getLoadCycles() {
+		return loadCycles;
+	}
+
+	public void setLoadCycles(String loadCycles) {
+		this.loadCycles = loadCycles;
+	}
+
+	public String getTimeRemaining() {
+		return timeRemaining;
+	}
+
+	public void setTimeRemaining(String timeRemaining) {
+		this.timeRemaining = timeRemaining;
+	}
+
     
     
 }
