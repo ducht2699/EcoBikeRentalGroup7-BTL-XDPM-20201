@@ -47,16 +47,17 @@ public class FindStationScreen extends javax.swing.JFrame {
     public void showInfoTable() throws SQLException {
         arrStation = new ArrayList<>();
         try {
-            String sqlString = "select * from station";
+            String sqlString = "select * from stations";
             ResultSet rs = db.query(sqlString);
             while (rs.next()) {
-                System.out.println("set station" + rs.getString("station_name"));
-                Station s = new Station(0, 0, 0, 0, "", "", "");
-                s.setStationArea(rs.getInt("area"));
-                s.setStationName(rs.getString("station_name"));
-                s.setStationId(rs.getInt("station_id"));
-                s.setLocationCode(rs.getString("location_code"));
+            	System.out.println("set station" + rs.getString("name"));
+                Station s = new Station();
+                s.setStationId(rs.getInt("id"));
+                s.setName(rs.getString("name"));         
                 s.setAddress(rs.getString("address"));
+                s.setDistance(rs.getFloat("distance_to_walk"));
+                s.setTime(rs.getFloat("time_to_walk"));
+                s.setNumberOfDocks(rs.getInt("number_of_docks"));
                 arrStation.add(s);
             }
         } catch (Exception e) {
@@ -65,21 +66,18 @@ public class FindStationScreen extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) stationListTable.getModel();
         System.out.println("set Model here" + arrStation.size());
         model.fireTableDataChanged();
-        for(int i = 0; i < arrStation.size(); i++){
+        for (int i = 0; i < arrStation.size(); i++) {
             Station s = arrStation.get(i);
-            
-            String sqlGetDockingPoint = "select * from docking_lock where station_id='"+s.getStationId()+"'";
-            int numDockingPoint = db.getRow(sqlGetDockingPoint);
-            System.out.println("num docking : " + numDockingPoint);
-            s.setNumberDockingPoint(numDockingPoint);
-            
-            String sqlGetBikeAvailable = "select * from bike where station_id='"+s.getStationId()+"' and status='0'";
+
+        
+
+            String sqlGetBikeAvailable = "select * from bikes  where station_id='" + s.getStationId() + "' and status='0'";
             int numbikeAvailable = db.getRow(sqlGetBikeAvailable);
             System.out.println("num bike avail: " + numbikeAvailable);
-            s.setNumBikeAvailable(numbikeAvailable);
-            
-            model.addRow(new Object[]{i+1, s.getStationName(), 100, s.getAddress(), s.getNumBikeAvailable()});
-            System.out.println("add row" + s.getStationName());
+            s.setNumberOfEmptyDocks(s.getNumberOfDocks()-numbikeAvailable);
+
+            model.addRow(new Object[]{i + 1, s.getName(), 100, s.getAddress(), s.getNumberOfEmptyDocks()});
+            System.out.println("add row" + s.getName());
         }
     }
 
@@ -220,7 +218,7 @@ public class FindStationScreen extends javax.swing.JFrame {
             String value = stationListTable.getModel().getValueAt(row, column).toString();
             
             arrStation.forEach((Station s) -> {
-                if (s.getStationName().equals(value)) {
+                if (s.getName().equals(value)) {
                     passStation = s;
                 }
             });

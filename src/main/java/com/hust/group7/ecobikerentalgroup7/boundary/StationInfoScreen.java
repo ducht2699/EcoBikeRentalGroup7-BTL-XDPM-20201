@@ -30,7 +30,7 @@ public class StationInfoScreen extends javax.swing.JFrame {
         initComponents();
         this.station = station;
         this.user = user;
-        System.out.println("station name info: " + station.getStationName());
+        System.out.println("station name info: " + station.getName());
         this.backScreen = backScreen;
         showStationInfo();
         imageMap.showImage(new File("station.jpg"));
@@ -39,13 +39,11 @@ public class StationInfoScreen extends javax.swing.JFrame {
     private void showStationInfo() {
         DefaultTableModel model = (DefaultTableModel) stationInfoTable.getModel();
         System.out.println("set model infor");
-        model.setValueAt(station.getStationName(), 0, 1);
+        model.setValueAt(station.getName(), 0, 1);
         model.setValueAt(station.getAddress(), 1, 1);
-        model.setValueAt(station.getStationArea(), 2, 1);
-        model.setValueAt("100 m", 3, 1);
-        model.setValueAt("5 minutes", 4, 1);
-        model.setValueAt(station.getNumberDockingPoint(), 5, 1);
-        model.setValueAt(station.getNumBikeAvailable(), 6, 1);
+        model.setValueAt(station.getDistance()+ " m", 2, 1);
+        model.setValueAt(station.getTime()+" minute", 3, 1);
+        model.setValueAt(station.getNumberOfDocks(), 4, 1);
 
         model.fireTableDataChanged();
     }
@@ -79,11 +77,9 @@ public class StationInfoScreen extends javax.swing.JFrame {
             new Object [][] {
                 {"Name station", null},
                 {"Address", null},
-                {"Area", null},
                 {"Distance to station", null},
                 {"Walking-times", null},
-                {"Number docking point", null},
-                {"Number bike available", null}
+                {"Number of docks", null}
             },
             new String [] {
                 "Name", "Value"
