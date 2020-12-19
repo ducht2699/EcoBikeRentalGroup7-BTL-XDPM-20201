@@ -9,7 +9,6 @@ import com.google.zxing.FormatException;
 import com.hust.group7.ecobikerentalgroup7.DataBase;
 import com.hust.group7.ecobikerentalgroup7.Constants;
 import com.hust.group7.ecobikerentalgroup7.Entity.Bike;
-import com.hust.group7.ecobikerentalgroup7.Entity.DockingPoint;
 import com.hust.group7.ecobikerentalgroup7.Entity.Transaction;
 import com.hust.group7.ecobikerentalgroup7.Entity.User;
 import com.hust.group7.ecobikerentalgroup7.GenerateQRCode;
@@ -43,75 +42,75 @@ public class ReturnBikeController {
     }
 
     public void handleCheckBarCode(ActionEvent e, File f, JFrame backScreen, User user, Bike bike, Transaction transaction) throws SQLException, FormatException {
-        System.out.println("Add file here");
-        String sqlString = "select * from docking_lock";
-        ResultSet rs = db.query(sqlString);
-        String barCodeScan = GenerateQRCode.readQRCode(f.getName());
-        System.out.println("image code name: " + f.getName());
-        Boolean isSuccess = false;
-        String idLock = "";
-        DockingPoint dp = new DockingPoint(0, 0, 0, "");
-        while (rs.next()) {
-            String barCode = rs.getString("bar_code");
-            System.out.println("barcode: " + barCode);
-            System.out.println("barcode scan: " + barCodeScan);
-            if (barCodeScan == null ? barCode == null : barCodeScan.equals(barCode)) {
-                dp.setLockId(rs.getInt("lock_id"));
-                dp.setStationId(rs.getInt("station_id"));
-                dp.setBarCode(rs.getString("bar_code"));
-                dp.setStatus(rs.getInt("status"));
-                int dockingStatus = rs.getInt("status");
-                System.out.println("lockid---------->: " + dp.getLockId());
-                isSuccess = true;
-                System.out.println("status docking: " + dockingStatus);
-                if (user.getStatus() == Constants.USER_RENTING) {
-                    if (dockingStatus == Constants.DOCKING_AVAIL) {
-                        System.out.println("Route to return");
-                        ReturnBikeScreen returnBikeScreen = new ReturnBikeScreen(transaction, bike, user, dp, backScreen);
-                        MainEntry.move(backScreen, returnBikeScreen);
-                    } else {
-                        JOptionPane.showMessageDialog(backScreen, "The doking point is not available to return!!");
-                    }
-                } else {
-                    if (dockingStatus == Constants.DOCKING_AVAIL) {
-                        JOptionPane.showMessageDialog(backScreen, "The doking point have no bike to rent!");
-                    } else {
-                        int confirm = JOptionPane.showConfirmDialog(backScreen, "You are not renting!!!");
-                        if (confirm == JOptionPane.OK_OPTION) {
-                            System.out.println("Route to rent");
-                            idLock = rs.getString("lock_id");
-                            System.out.println("id Lock : " + idLock);
-                            RentBikeScreen rentBikeScreen = new RentBikeScreen(user, dp, backScreen);
-                            MainEntry.move(backScreen, rentBikeScreen);
-                        } else {
-                            JOptionPane.showMessageDialog(backScreen, "Good bye you should find another docking");
-                        }
-
-                    }
-
-                }
-
-            }
-        }
-        if (!isSuccess) {
-            JOptionPane.showMessageDialog(backScreen, "Scan code fail, Try again!!");
-        }
+//        System.out.println("Add file here");
+//        String sqlString = "select * from docking_lock";
+//        ResultSet rs = db.query(sqlString);
+//        String barCodeScan = GenerateQRCode.readQRCode(f.getName());
+//        System.out.println("image code name: " + f.getName());
+//        Boolean isSuccess = false;
+//        String idLock = "";
+//        DockingPoint dp = new DockingPoint(0, 0, 0, "");
+//        while (rs.next()) {
+//            String barCode = rs.getString("bar_code");
+//            System.out.println("barcode: " + barCode);
+//            System.out.println("barcode scan: " + barCodeScan);
+//            if (barCodeScan == null ? barCode == null : barCodeScan.equals(barCode)) {
+//                dp.setLockId(rs.getInt("lock_id"));
+//                dp.setStationId(rs.getInt("station_id"));
+//                dp.setBarCode(rs.getString("bar_code"));
+//                dp.setStatus(rs.getInt("status"));
+//                int dockingStatus = rs.getInt("status");
+//                System.out.println("lockid---------->: " + dp.getLockId());
+//                isSuccess = true;
+//                System.out.println("status docking: " + dockingStatus);
+//                if (user.getStatus() == Constants.USER_RENTING) {
+//                    if (dockingStatus == Constants.DOCKING_AVAIL) {
+//                        System.out.println("Route to return");
+//                        ReturnBikeScreen returnBikeScreen = new ReturnBikeScreen(transaction, bike, user, dp, backScreen);
+//                        MainEntry.move(backScreen, returnBikeScreen);
+//                    } else {
+//                        JOptionPane.showMessageDialog(backScreen, "The doking point is not available to return!!");
+//                    }
+//                } else {
+//                    if (dockingStatus == Constants.DOCKING_AVAIL) {
+//                        JOptionPane.showMessageDialog(backScreen, "The doking point have no bike to rent!");
+//                    } else {
+//                        int confirm = JOptionPane.showConfirmDialog(backScreen, "You are not renting!!!");
+//                        if (confirm == JOptionPane.OK_OPTION) {
+//                            System.out.println("Route to rent");
+//                            idLock = rs.getString("lock_id");
+//                            System.out.println("id Lock : " + idLock);
+//                            RentBikeScreen rentBikeScreen = new RentBikeScreen(user, dp, backScreen);
+//                            MainEntry.move(backScreen, rentBikeScreen);
+//                        } else {
+//                            JOptionPane.showMessageDialog(backScreen, "Good bye you should find another docking");
+//                        }
+//
+//                    }
+//
+//                }
+//
+//            }
+//        }
+//        if (!isSuccess) {
+//            JOptionPane.showMessageDialog(backScreen, "Scan code fail, Try again!!");
+//        }
     }
 
     public void showInfoDeposit(Bike bike, JLabel valueBikeModel, JLabel valueBike, JLabel valueDeposit) throws Exception {
-        int valueOfBike = bike.getValue();
-        String modelOfBike = bike.getModel();
+        float valueOfBike = bike.getCost().getDeposit();
+        String liscense = bike.getLicensePlate();
 
-        valueBikeModel.setText(modelOfBike);
-        valueBike.setText(Integer.toString(valueOfBike) + Constants.MONEY_UNIT);
-        valueDeposit.setText(Integer.toString(calculateDeposit(valueOfBike)) + Constants.MONEY_UNIT);
+        valueBikeModel.setText(liscense);
+        valueBike.setText(Float.toString(valueOfBike) + Constants.MONEY_UNIT);
+        valueDeposit.setText(Float.toString(calculateDeposit(valueOfBike)) + Constants.MONEY_UNIT);
     }
 
-    public int calculateDeposit(int valueOfBike) throws Exception {
+    public float calculateDeposit(float valueOfBike) throws Exception {
         if (valueOfBike < 0) {
             throw new IOException("Value of bike can not be negative");
         }
-        return (int) Constants.DEPOSIT_PERCENT * valueOfBike / 100;
+        return (float) Constants.DEPOSIT_PERCENT * valueOfBike / 100;
     }
 
     public int payDeposit(int balance, int deposit) throws IOException {
