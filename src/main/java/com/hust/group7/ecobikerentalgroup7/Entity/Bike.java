@@ -1,124 +1,133 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.hust.group7.ecobikerentalgroup7.Entity;
 
-
-
 public class Bike {
-    private int bikeId, stationId, lockId, value, status;
-    private String licensePlate, model, type, battery, brand, image;
+    private int bikeId;//id
+    private String name;//tên
+    private String type;//loại xe
+    private float weight;//cân nặng(kg)
+    private String licensePlate; // biển xe
+    private String manufacturingDate; // ngày sản xuất
+    private String producer;//hãng sx
+    private String barcode; // mã vạch
+    private int status; // trạng thái(0: chưa thuê, 1: đã thuê)
+    private int stationId; // id bãi xe
+    private String image; //ảnh
+    private Cost cost; // giá tiền
+    
+    public Bike() {}
 
-    public Bike(int bikeId, int stationId, int lockId, int value,
-            String licensePlate, String model, String type,
-            String battery, String brand, String image, int status) {
-        this.bikeId = bikeId;
-        this.stationId = stationId;
-        this.lockId = lockId;
-        this.licensePlate = licensePlate;
-        this.model = model;
-        this.type = type;
-        this.battery = battery;
-        this.brand = brand;
-        this.image = image;
-        this.status = status;
-        this.value = value;
-    }
+	public Bike(int bikeId, String name, String type, float weight, String licensePlate, String manufacturingDate,
+			String producer, String barcode, int status, int stationId, String image, Cost cost) {
+		super();
+		this.bikeId = bikeId;
+		this.name = name;
+		this.type = type;
+		this.weight = weight;
+		this.licensePlate = licensePlate;
+		this.manufacturingDate = manufacturingDate;
+		this.producer = producer;
+		this.barcode = barcode;
+		this.status = status;
+		this.stationId = stationId;
+		this.image = image;
+		this.cost = cost;
+	}
 
-    public int getValue() {
-        return value;
-    }
+	public int getBikeId() {
+		return bikeId;
+	}
 
-    public void setValue(int value) {
-        this.value = value;
-    }
+	public void setBikeId(int bikeId) {
+		this.bikeId = bikeId;
+	}
 
-    public String getImage() {
-        return image;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public int getStatus() {
-        return status;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public void setImage(String image) {
-        this.image = image;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public int getBikeId() {
-        return bikeId;
-    }
+	public float getWeight() {
+		return weight;
+	}
 
-    public void setBikeId(int bikeId) {
-        this.bikeId = bikeId;
-    }
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
 
-    public int getStationId() {
-        return stationId;
-    }
+	public String getLicensePlate() {
+		return licensePlate;
+	}
 
-    public void setStationId(int stationId) {
-        this.stationId = stationId;
-    }
+	public void setLicensePlate(String licensePlate) {
+		this.licensePlate = licensePlate;
+	}
 
-    public int getLockId() {
-        return lockId;
-    }
+	public String getManufacturingDate() {
+		return manufacturingDate;
+	}
 
-    public void setLockId(int lockId) {
-        this.lockId = lockId;
-    }
+	public void setManufacturingDate(String manufacturingDate) {
+		this.manufacturingDate = manufacturingDate;
+	}
 
-    public String getLicensePlate() {
-        return licensePlate;
-    }
+	public String getProducer() {
+		return producer;
+	}
 
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
-    }
+	public void setProducer(String producer) {
+		this.producer = producer;
+	}
 
-    public String getModel() {
-        return model;
-    }
+	public String getBarcode() {
+		return barcode;
+	}
 
-    public void setModel(String model) {
-        this.model = model;
-    }
+	public void setBarcode(String barcode) {
+		this.barcode = barcode;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public int getStatus() {
+		return status;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
-    public String getBattery() {
-        return battery;
-    }
+	public int getStationId() {
+		return stationId;
+	}
 
-    public void setBattery(String battery) {
-        this.battery = battery;
-    }
+	public void setStationId(int stationId) {
+		this.stationId = stationId;
+	}
 
-    public String getBrand() {
-        return brand;
-    }
+	public String getImage() {
+		return image;
+	}
 
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
+	public void setImage(String image) {
+		this.image = image;
+	}
 
-    @Override
-    public String toString() {
-        return this.type; //To change body of generated methods, choose Tools | Templates.
-    }
+	public Cost getCost() {
+		return cost;
+	}
+
+	public void setCost(Cost cost) {
+		this.cost = cost;
+	}
     
     
     

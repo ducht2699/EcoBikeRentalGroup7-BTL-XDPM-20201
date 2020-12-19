@@ -7,56 +7,102 @@ package com.hust.group7.ecobikerentalgroup7.Entity;
 
 
 public class PaymentMethod {
-    private String nameMethod, cardCode, nameOwner;
-    private int cvvCode, dateExpired;
+	
+	private int methodId;
+	
+	private String cardholderName; //tên chủ thẻ
+	
+	private String cardNumber; // số thẻ
+	
+	private String issuingBank; // ngân h
+	
+	private String expirationDate; //ngày hết hạn
+	
+	private String securityCode; // mã bảo mật
+	
+	private float remainingAmount; // số tiền còn lại trong thẻ
+	
+	private String userId;
+	
+	public PaymentMethod() {
+		
+	}
 
-    public PaymentMethod(String nameMethod, String cardCode, String nameOwner, int cvvCode, int dateExpired) {
-        this.nameMethod = nameMethod;
-        this.cardCode = cardCode;
-        this.nameOwner = nameOwner;
-        this.cvvCode = cvvCode;
-        this.dateExpired = dateExpired;
-    }
+	public PaymentMethod(int methodId, String cardholderName, String cardNumber, String issuingBank,
+			String expirationDate, String securityCode, float remainingAmount, String userId) {
+		super();
+		this.methodId = methodId;
+		this.cardholderName = cardholderName;
+		this.cardNumber = cardNumber;
+		this.issuingBank = issuingBank;
+		this.expirationDate = expirationDate;
+		this.securityCode = securityCode;
+		this.remainingAmount = remainingAmount;
+		this.userId = userId;
+	}
 
-    public String getNameMethod() {
-        return nameMethod;
-    }
+	public int getMethodId() {
+		return methodId;
+	}
 
-    public void setNameMethod(String nameMethod) {
-        this.nameMethod = nameMethod;
-    }
+	public void setMethodId(int methodId) {
+		this.methodId = methodId;
+	}
 
-    public String getCardCode() {
-        return cardCode;
-    }
+	public String getCardholderName() {
+		return cardholderName;
+	}
 
-    public void setCardCode(String cardCode) {
-        this.cardCode = cardCode;
-    }
+	public void setCardholderName(String cardholderName) {
+		this.cardholderName = cardholderName;
+	}
 
-    public String getNameOwner() {
-        return nameOwner;
-    }
+	public String getCardNumber() {
+		return cardNumber;
+	}
 
-    public void setNameOwner(String nameOwner) {
-        this.nameOwner = nameOwner;
-    }
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
+	}
 
-    public int getCvvCode() {
-        return cvvCode;
-    }
+	public String getIssuingBank() {
+		return issuingBank;
+	}
 
-    public void setCvvCode(int cvvCode) {
-        this.cvvCode = cvvCode;
-    }
+	public void setIssuingBank(String issuingBank) {
+		this.issuingBank = issuingBank;
+	}
 
-    public int getDateExpired() {
-        return dateExpired;
-    }
+	public String getExpirationDate() {
+		return expirationDate;
+	}
 
-    public void setDateExpired(int dateExpired) {
-        this.dateExpired = dateExpired;
-    }
-    
+	public void setExpirationDate(String expirationDate) {
+		this.expirationDate = expirationDate;
+	}
+
+	public String getSecurityCode() {
+		return securityCode;
+	}
+
+	public void setSecurityCode(String securityCode) {
+		this.securityCode = securityCode;
+	}
+
+	public float getRemainingAmount() {
+		return remainingAmount;
+	}
+
+	public void setRemainingAmount(float remainingAmount) {
+		this.remainingAmount = remainingAmount;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
     
 }

@@ -10,9 +10,14 @@ public class User {
     private String username, password;
     private int userId, status;
     private int isAdmin;
+    
+    public User() {
+    	
+    }
 
     public User(int userId, String username, int status, int isAdmin) {
-        this.userId = userId;
+        super();
+    	this.userId = userId;
         this.username = username;
         this.status = status;
         this.isAdmin = isAdmin;
