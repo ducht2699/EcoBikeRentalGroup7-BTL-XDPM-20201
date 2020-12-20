@@ -15,8 +15,8 @@ public class Constants {
     public static final String SECRET_KEY = "BgNETdvdQqY=";
     public static final String APP_CODE = "A68Jqvs7stU=";
     public static final String APP_VERSION = "1.0.1";
-    public static final int DOCKING_AVAIL = 0;
-    public static final int DOCKING_BUSY = 1;
+    public static final int TRANS_ONGOING = 0;
+    public static final int TRANS_FINISHED= 1;
     public static final int USER_RENTING = 1;
     public static final int USER_AVAIL = 0;
     public static final int BIKE_RENTED = 1;

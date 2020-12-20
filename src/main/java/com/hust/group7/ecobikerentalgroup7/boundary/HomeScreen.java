@@ -52,7 +52,6 @@ public class HomeScreen extends javax.swing.JFrame {
     }
 
     private void getTransaction() throws SQLException {
-        int bikeId;
         String sqlGetTransaction = "SELECT * FROM transactions WHERE user_id = '" + user.getUserId() + "'";
 		ResultSet rs = db.query(sqlGetTransaction);
         while (rs.next()) {

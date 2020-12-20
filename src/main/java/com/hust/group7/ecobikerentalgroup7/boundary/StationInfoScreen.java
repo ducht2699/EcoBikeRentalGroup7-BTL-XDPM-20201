@@ -50,6 +50,8 @@ public class StationInfoScreen extends javax.swing.JFrame {
         model.setValueAt(station.getTime()+" minute", 3, 1);
         model.setValueAt(station.getNumberOfDocks(), 4, 1);
         model.setValueAt(numbikeAvailable, 5, 1);
+        
+        stationName.setText(station.getName());
 
         model.fireTableDataChanged();
     }
@@ -83,10 +85,11 @@ public class StationInfoScreen extends javax.swing.JFrame {
             new Object [][] {
                 {"Name station", null},
                 {"Address", null},
+                {"Area", null},
                 {"Distance to station", null},
                 {"Walking-times", null},
-                {"Number of docks", null},
-                {"Number bike Available",null}
+                {"Number docking point", null},
+                {"Number bike available", null}
             },
             new String [] {
                 "Name", "Value"

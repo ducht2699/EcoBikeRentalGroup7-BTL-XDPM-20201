@@ -5,7 +5,6 @@
  */
 package com.hust.group7.ecobikerentalgroup7.boundary.admin;
 
-
 import com.hust.group7.ecobikerentalgroup7.Constants;
 import com.hust.group7.ecobikerentalgroup7.DataBase;
 import com.hust.group7.ecobikerentalgroup7.Entity.Bike;
@@ -41,7 +40,6 @@ public class AdminAddBike extends javax.swing.JFrame {
     /**
      * Creates new form FindStationScreen
      */
-    
     File fileBarCode;
     private JFrame backScreen;
     private ArrayList<Station> arrStation;
@@ -98,20 +96,20 @@ public class AdminAddBike extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        tfModel = new javax.swing.JTextField();
+        tfProducer = new javax.swing.JTextField();
         tfPlateLiscense = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        tfDockingPoint = new javax.swing.JTextField();
+        tfBarcode = new javax.swing.JTextField();
         tfBattery = new javax.swing.JTextField();
         cbbStation = new javax.swing.JComboBox<>();
-        tfBrand = new javax.swing.JTextField();
-        tfPrice = new javax.swing.JTextField();
+        tfWeight = new javax.swing.JTextField();
         cbbBikeType = new javax.swing.JComboBox<>();
-        dcOperationDate = new com.toedter.calendar.JDateChooser();
+        dcManufacturingDate = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
         btnAddBikeImage = new javax.swing.JButton();
         imageCodePanel = new com.hust.group7.ecobikerentalgroup7.boundary.ImageCodePanel();
+        jLabel3 = new javax.swing.JLabel();
+        tfName = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Add Bike");
@@ -139,23 +137,21 @@ public class AdminAddBike extends javax.swing.JFrame {
 
         jLabel7.setText("Plate Liscense :");
 
-        jLabel8.setText("Brand :");
+        jLabel8.setText("Weight :");
 
-        jLabel9.setText("Model :");
+        jLabel9.setText("Producer :");
 
         jLabel10.setText("Battery :");
 
-        jLabel11.setText("Operation Date :");
+        jLabel11.setText("Manufacturing Date :");
 
         jLabel12.setText("Bike Type :");
 
-        jLabel13.setText("Price :");
+        jLabel1.setText("Barcode :");
 
-        jLabel1.setText("Docking point :");
+        cbbBikeType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bike", "EBike", "Twin Bike" }));
 
-        cbbBikeType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single Bike", "Double Bike", "Electrical Bike" }));
-
-        dcOperationDate.setDateFormatString("dd/MM/yyyy");
+        dcManufacturingDate.setDateFormatString("dd/MM/yyyy");
 
         jLabel2.setText("Image :");
 
@@ -179,55 +175,49 @@ public class AdminAddBike extends javax.swing.JFrame {
             .addGap(0, 178, Short.MAX_VALUE)
         );
 
+        jLabel3.setText("Name :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(265, 265, 265)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfDockingPoint, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                            .addComponent(cbbBikeType, 0, 1, Short.MAX_VALUE)
-                            .addComponent(tfBattery))))
-                .addContainerGap(32, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(54, 54, 54)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tfModel)
-                                .addComponent(tfPlateLiscense, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cbbStation, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfBrand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13))
-                        .addGap(178, 178, 178))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(54, 54, 54))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tfProducer)
+                                .addComponent(tfPlateLiscense, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbbStation, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfWeight, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel12))
+                                .addGap(178, 178, 178))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addContainerGap())))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(142, Short.MAX_VALUE)
+                .addContainerGap(117, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -236,7 +226,7 @@ public class AdminAddBike extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAddBikeImage)
-                            .addComponent(dcOperationDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(dcManufacturingDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(imageCodePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -246,18 +236,30 @@ public class AdminAddBike extends javax.swing.JFrame {
                                 .addComponent(btnAddBike, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(69, 69, 69)))
                 .addGap(96, 96, 96))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(265, 265, 265)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tfName, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(tfBarcode, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                        .addComponent(cbbBikeType, 0, 1, Short.MAX_VALUE)
+                        .addComponent(tfBattery)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
-                .addGap(29, 29, 29)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(cbbStation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13)
-                    .addComponent(tfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -267,18 +269,18 @@ public class AdminAddBike extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(tfModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfProducer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
                     .addComponent(tfBattery, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(tfBrand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(tfDockingPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dcOperationDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dcManufacturingDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -286,7 +288,7 @@ public class AdminAddBike extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(imageCodePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddBike)
                     .addComponent(btnCancel))
@@ -302,40 +304,53 @@ public class AdminAddBike extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnAddBikeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBikeActionPerformed
-        DateFormat fm = new SimpleDateFormat("dd/MM/yyyy");
-        String station = cbbStation.getSelectedItem().toString(),
+        DateFormat fm = new SimpleDateFormat("yyyy/MM/dd");
+
+        String station = cbbStation.getSelectedItem().toString();
+        String name = tfName.getText(),
                 plateLiscense = tfPlateLiscense.getText(),
-                model = tfModel.getText(),
-                brand = tfBrand.getText(),
-                price = tfPrice.getText(),
+                producer = tfProducer.getText(),
+                weight = tfWeight.getText(),
+                imageName = imageCodePanel.getImageName(),
                 bikeType = cbbBikeType.getSelectedItem().toString(),
                 battery = tfBattery.getText(),
-                dockingPoint = tfDockingPoint.getText(),
-                OPdate = fm.format(dcOperationDate.getDate());
-        //add dockinglock
-        String sql = "INSERT INTO `docking_lock` (`lock_id`, `station_id`, `bar_code`, `status`) VALUES\n"
-                + "(null, " + getStationIDByName(station) + ", '" + plateLiscense + "', 1)";
-        int lockID = -1;
-        try {
-            ResultSet rs = db.insert(sql);
-            rs.next();
-            lockID = rs.getInt(1);
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminAddBike.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                barCode = tfBarcode.getText(),
+                manufacturingDate = fm.format(dcManufacturingDate.getDate());
 
         //add Bike
-        sql = "INSERT INTO `bikes` (`bike_id`, `station_id`, `lock_id`, `plate_license`, `brand`, `model`, `battery`, `operation_date`, `type`, `status`, `value_of_bike`, `image`) VALUES\n"
-                + "(null, " + getStationIDByName(station)
-                + ", " + lockID
-                + ", '" + plateLiscense
-                + "', '" + brand
-                + "', '" + model
-                + "', " + battery
-                + ", '" + OPdate
-                + "', '" + bikeType
-                + "', 0, " + price
-                + ", 'bike_default.png')";
+        String sql = "INSERT INTO `bikes` (`id`, `name`, `type`, `weight`, `license_plate`, `manuafacturing_date`, `producer`, `batery_percentage`, `load_cycles`, `time_remaining`, `barcode`,`status`, `station_id`, `image`) VALUES\n"
+                + "(null, '" + name
+                + "','" + bikeType
+                + "',' " + weight
+                + "', '" + plateLiscense
+                + "', '" + manufacturingDate
+                + "', '" + producer
+                + "', '" + battery
+                + "',null, null, '" + barCode
+                + "', 0,'" + getStationIDByName(station)
+                + "', '" + imageName + "')";
+        try {
+            db.insert(sql);
+            JOptionPane.showMessageDialog(this, "Inserted!");
+            // -------------------
+            String sqlString = "select * from stations where name= '" + station + "';";
+            ResultSet rs = db.query(sqlString);
+            Station stationBack = new Station();
+            while (rs.next()) {
+
+                stationBack.setAddress(rs.getString("address"));
+                stationBack.setStationId(rs.getInt("id"));
+                stationBack.setName(rs.getString("name"));
+                stationBack.setDistance(rs.getInt("distance_to_walk"));
+
+            }
+
+            // ---------------
+            MainEntry.move(this, new AdminManageBikes(new AdminHomeScreen(user, null), user, stationBack));
+//            showInfoTable();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminAddStation.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAddBikeActionPerformed
 
     private void btnAddBikeImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBikeImageActionPerformed
@@ -371,7 +386,7 @@ public class AdminAddBike extends javax.swing.JFrame {
     private javax.swing.JButton btnCancel;
     private javax.swing.JComboBox<String> cbbBikeType;
     private javax.swing.JComboBox<String> cbbStation;
-    private com.toedter.calendar.JDateChooser dcOperationDate;
+    private com.toedter.calendar.JDateChooser dcManufacturingDate;
     private com.hust.group7.ecobikerentalgroup7.boundary.ImageCodePanel imageCodePanel;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JFileChooser jFileChooser1;
@@ -379,18 +394,18 @@ public class AdminAddBike extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField tfBarcode;
     private javax.swing.JTextField tfBattery;
-    private javax.swing.JTextField tfBrand;
-    private javax.swing.JTextField tfDockingPoint;
-    private javax.swing.JTextField tfModel;
+    private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfPlateLiscense;
-    private javax.swing.JTextField tfPrice;
+    private javax.swing.JTextField tfProducer;
+    private javax.swing.JTextField tfWeight;
     // End of variables declaration//GEN-END:variables
 }

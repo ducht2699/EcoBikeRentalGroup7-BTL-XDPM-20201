@@ -52,7 +52,33 @@ public class AdminManageBikes extends javax.swing.JFrame {
 
 		sortTable();
 	}
+	
+//    public AdminManageBikes(User user2, AdminHomeScreen adminHomeScreen) {
+//		// TODO Auto-generated constructor stub
+//	}
 
+	public void deleteBike() throws SQLException {
+        int column = 1;
+        int row = listBikeTable.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Choose a Bike first!");
+        } else {
+            String value = listBikeTable.getModel().getValueAt(row, column).toString();
+
+            arrBike.forEach((Bike s) -> {
+                if (s.getLicensePlate().equals(value)) {
+                	passBike = s;
+                }
+            });
+
+            //delete station in DB
+            String sqlDelete = "DELETE FROM bikes WHERE id = ?";
+            db.delete(sqlDelete, passBike.getBikeId());
+
+            JOptionPane.showMessageDialog(this, "Deleted!");
+
+        }
+    }
 	private void showListBike() {
 		stationNameTilte.setText(station.getName());
 		arrBike = new ArrayList<>();
@@ -294,6 +320,7 @@ public class AdminManageBikes extends javax.swing.JFrame {
 	private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backButtonActionPerformed
 		MainEntry.move(this, backScreen);
 	}// GEN-LAST:event_backButtonActionPerformed
+	
 
 	private void btnAddBikeActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddBikeActionPerformed
 		// TODO add your handling code here:
@@ -306,7 +333,15 @@ public class AdminManageBikes extends javax.swing.JFrame {
 	}// GEN-LAST:event_btnAddBikeActionPerformed
 
 	private void btnDeleteBikeActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteBikeActionPerformed
-		// TODO add your handling code here:
+		 try {
+	            // TODO add your handling code here:
+	            deleteBike();
+	            showAllBike();
+	            
+	            
+	        } catch (SQLException ex) {
+	            Logger.getLogger(AdminManageBikes.class.getName()).log(Level.SEVERE, null, ex);
+	        }
 	}// GEN-LAST:event_btnDeleteBikeActionPerformed
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

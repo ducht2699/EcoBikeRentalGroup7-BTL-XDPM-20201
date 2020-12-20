@@ -50,9 +50,9 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="cardCodeField" max="32767" attributes="0"/>
                           <Component id="nameOwnerField" max="32767" attributes="0"/>
-                          <Component id="namePaymentMethodFiled" max="32767" attributes="0"/>
                           <Component id="cvvCodeField" max="32767" attributes="0"/>
                           <Component id="dateExpiredField" pref="189" max="32767" attributes="0"/>
+                          <Component id="cbbIssuingBank" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -67,8 +67,8 @@
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="namePaymentMethodFiled" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="namePaymentMethodLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbbIssuingBank" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -101,19 +101,14 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="namePaymentMethodFiled">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="namePaymentMethodFiledActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="namePaymentMethodLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Name Payment Method"/>
+        <Property name="text" type="java.lang.String" value="Issuing bank :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="cardCodeLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Card Code"/>
+        <Property name="text" type="java.lang.String" value="Card Number :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="cardCodeField">
@@ -128,7 +123,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="nameOwnerLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Name Owner"/>
+        <Property name="text" type="java.lang.String" value="Name Owner :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="nameOwnerField">
@@ -154,7 +149,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="cvvCodeLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cvv Code"/>
+        <Property name="text" type="java.lang.String" value="Security code :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="cvvCodeField">
@@ -165,6 +160,20 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="dateExpiredField">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbbIssuingBank">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Vietinbank"/>
+            <StringItem index="1" value="Momo"/>
+            <StringItem index="2" value="Techcombank"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

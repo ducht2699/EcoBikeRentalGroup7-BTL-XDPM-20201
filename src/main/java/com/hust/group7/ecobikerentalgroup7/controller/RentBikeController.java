@@ -82,7 +82,19 @@ public class RentBikeController {
 
         valueBikeModel.setText(liscense);
         valueBike.setText(Float.toString(valueOfBike) + Constants.MONEY_UNIT);
-        valueDeposit.setText(Float.toString(calculateDeposit(valueOfBike)) + Constants.MONEY_UNIT);
+        float dep = 0;
+        switch (bike.getType()) {
+            case "Bike":
+                dep = 400000.0f;
+                break;
+            case "Twin Bike":
+                dep = 550000.0f;
+                break;
+            case "EBike":
+                dep = 700000.0f;
+                break;
+        }
+        valueDeposit.setText(Float.toString(dep) + Constants.MONEY_UNIT);
     }
 
     public float calculateDeposit(float valueOfBike) throws Exception {

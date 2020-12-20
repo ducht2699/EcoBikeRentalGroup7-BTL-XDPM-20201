@@ -41,8 +41,10 @@ com\hust\group7\ecobikerentalgroup7\boundary\HomeScreen$4.class
 com\hust\group7\ecobikerentalgroup7\boundary\RentingScreen$1.class
 com\hust\group7\ecobikerentalgroup7\boundary\StationInfoScreen$1.class
 com\hust\group7\ecobikerentalgroup7\MainEntry.class
+com\hust\group7\ecobikerentalgroup7\boundary\RentBikeScreen$2.class
 com\hust\group7\ecobikerentalgroup7\boundary\admin\AdminManageStation.class
 com\hust\group7\ecobikerentalgroup7\boundary\FindStationScreen$2.class
+com\hust\group7\ecobikerentalgroup7\boundary\RentBikeScreen$3.class
 com\hust\group7\ecobikerentalgroup7\boundary\StationInfoScreen$2.class
 com\hust\group7\ecobikerentalgroup7\Entity\User.class
 com\hust\group7\ecobikerentalgroup7\boundary\admin\AdminAddStation.class
@@ -72,6 +74,7 @@ com\hust\group7\ecobikerentalgroup7\boundary\PaymentScreen$5.class
 com\hust\group7\ecobikerentalgroup7\boundary\ScanCodeScreen.class
 com\hust\group7\ecobikerentalgroup7\boundary\FindStationScreen$4.class
 com\hust\group7\ecobikerentalgroup7\boundary\FindStationScreen.class
+com\hust\group7\ecobikerentalgroup7\boundary\RentBikeScreen$1.class
 com\hust\group7\ecobikerentalgroup7\boundary\admin\AdminManageStation$1.class
 com\hust\group7\ecobikerentalgroup7\Entity\Station.class
 com\hust\group7\ecobikerentalgroup7\boundary\admin\AdminHomeScreen$3.class
@@ -84,8 +87,8 @@ com\hust\group7\ecobikerentalgroup7\boundary\HomeScreen$1.class
 com\hust\group7\ecobikerentalgroup7\boundary\admin\AdminManageStation$7.class
 com\hust\group7\ecobikerentalgroup7\boundary\FindStationScreen$5.class
 com\hust\group7\ecobikerentalgroup7\boundary\PaymentScreen$2.class
-com\hust\group7\ecobikerentalgroup7\boundary\AddPayentMethodScreen$4.class
 com\hust\group7\ecobikerentalgroup7\DataBase.class
+com\hust\group7\ecobikerentalgroup7\boundary\RentBikeScreen.class
 com\hust\group7\ecobikerentalgroup7\Entity\Cost.class
 com\hust\group7\ecobikerentalgroup7\boundary\ViewListBikeScreen$1.class
 com\hust\group7\ecobikerentalgroup7\boundary\admin\AdminManageBikes$2.class
