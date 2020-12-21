@@ -23,9 +23,11 @@ public class DataBase {
     private final String USER = "root";
     private final String PASS = "";
     public Connection connection;
+    public static Connection connectionStatic;
 
     public DataBase() throws SQLException {
         this.connection = DriverManager.getConnection(URL, USER, PASS);
+        connectionStatic = DriverManager.getConnection(URL, USER, PASS);
     }
 
     public ResultSet query(String sqlString) throws SQLException {
