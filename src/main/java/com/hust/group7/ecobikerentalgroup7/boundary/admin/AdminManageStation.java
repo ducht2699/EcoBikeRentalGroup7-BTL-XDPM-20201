@@ -9,6 +9,7 @@ package com.hust.group7.ecobikerentalgroup7.boundary.admin;
 import com.hust.group7.ecobikerentalgroup7.DataBase;
 import com.hust.group7.ecobikerentalgroup7.Entity.Station;
 import com.hust.group7.ecobikerentalgroup7.Entity.User;
+import com.hust.group7.ecobikerentalgroup7.api.StationApi;
 
 import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
@@ -76,15 +77,16 @@ public class AdminManageStation extends javax.swing.JFrame {
             String sqlString = "select * from stations";
             ResultSet rs = db.query(sqlString);
             while (rs.next()) {
-                System.out.println("set station" + rs.getString("name"));
-                Station s = new Station();
-                s.setStationId(rs.getInt("id"));
-                s.setName(rs.getString("name"));         
-                s.setAddress(rs.getString("address"));
-                s.setDistance(rs.getFloat("distance_to_walk"));
-                s.setTime(rs.getFloat("time_to_walk"));
-                s.setNumberOfDocks(rs.getInt("number_of_docks"));
-                arrStation.add(s);
+//                System.out.println("set station" + rs.getString("name"));
+//                Station s = new Station();
+//                s.setStationId(rs.getInt("id"));
+//                s.setName(rs.getString("name"));         
+//                s.setAddress(rs.getString("address"));
+//                s.setDistance(rs.getFloat("distance_to_walk"));
+//                s.setTime(rs.getFloat("time_to_walk"));
+//                s.setNumberOfDocks(rs.getInt("number_of_docks"));
+//                arrStation.add(s);
+            	arrStation = StationApi.getAllStations();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e);
@@ -103,7 +105,7 @@ public class AdminManageStation extends javax.swing.JFrame {
             System.out.println("num bike avail: " + numbikeAvailable);
             s.setNumberOfEmptyDocks(s.getNumberOfDocks()-numbikeAvailable);
 
-            model.addRow(new Object[]{i + 1, s.getName(), 100, s.getAddress(), s.getNumberOfEmptyDocks()});
+            model.addRow(new Object[]{s.getStationId(), s.getName(), s.getAddress(), s.getNumberOfDocks(), s.getDistance(), s.getTime(), s.getNumberOfBikes(), s.getNumberOfEbikes(), s.getNumberOfTwinBikes(), s.getNumberOfEmptyDocks()});
             System.out.println("add row" + s.getName());
         }
     }
@@ -136,19 +138,19 @@ public class AdminManageStation extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Stt", "Station Name", "Distance(m)", "Address", "Bike Avail"
-            }
+                    "Station Id", "Station Name", "Address", "Number Of Docks", "Distance", "Time", "Bikes", "EBikes", "TwinBikes", "Empty Docks"
+                }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
-            };
+//            Class[] types = new Class [] {
+//                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+//            };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+//            public Class getColumnClass(int columnIndex) {
+//                return types [columnIndex];
+//            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
