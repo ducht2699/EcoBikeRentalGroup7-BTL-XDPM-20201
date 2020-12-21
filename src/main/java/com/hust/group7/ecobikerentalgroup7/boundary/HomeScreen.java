@@ -39,7 +39,7 @@ public class HomeScreen extends javax.swing.JFrame {
         this.db = new DataBase();
         imageCodePanel.showImage(new File("home_station.jpg"));
         usernameLabel.setText(user.getUsername());
-        if (user.getStatus() == Constants.USER_RENTING) {
+        if (this.user.getStatus() == 1) {
             System.out.println("Home user is renting");
             getTransaction();
             statusLabel.setForeground(Color.green);
@@ -214,7 +214,7 @@ public class HomeScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rentingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentingButtonActionPerformed
-        if (user.getStatus() == Constants.USER_RENTING) {
+        if (this.user.getStatus() == 1) {
             RentingScreen rentingScreen = new RentingScreen(transaction, user, bike, this);
             MainEntry.move(this, rentingScreen);
         } else {
@@ -223,17 +223,17 @@ public class HomeScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_rentingButtonActionPerformed
 
     private void rentBikeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentBikeButtonActionPerformed
-        try {
-            if (user.getStatus() == Constants.USER_AVAIL) {
-                ScanCodeScreen scs = new ScanCodeScreen(user, this);
-                MainEntry.move(this, scs);
-            } else {
-                ScanCodeScreen scs = new ScanCodeScreen(transaction, bike, user, this);
-                MainEntry.move(this, scs);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            if (user.getStatus() == Constants.USER_AVAIL) {
+//                ScanCodeScreen scs = new ScanCodeScreen(user, this);
+//                MainEntry.move(this, scs);
+//            } else {
+//                ScanCodeScreen scs = new ScanCodeScreen(transaction, bike, user, this);
+//                MainEntry.move(this, scs);
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_rentBikeButtonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed

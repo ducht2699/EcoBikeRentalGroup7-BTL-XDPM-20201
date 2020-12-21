@@ -323,10 +323,11 @@ public class PaymentScreen extends javax.swing.JFrame {
                         db.update(sql);
                         //update user status
                         sql = "UPDATE users SET status = 1 " + "WHERE ID = " + user.getUserId();
+                        this.user.setStatus(1);
                         db.update(sql);
                         //home
                         JOptionPane.showMessageDialog(this, "Rent sucessfully!");
-                        MainEntry.move(this, new HomeScreen(user, new LoginScreen()));
+                        MainEntry.move(this, new HomeScreen(this.user, new LoginScreen()));
                     } catch (SQLException ex) {
                         Logger.getLogger(PaymentScreen.class.getName()).log(Level.SEVERE, null, ex);
                     }
