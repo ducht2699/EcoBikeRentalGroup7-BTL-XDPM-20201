@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.hust.group11.ecobikerentalgroup11.controller;
+package com.hust.group7.ecobikerentalgroup7.controller;
 
 import com.hust.group7.ecobikerentalgroup7.controller.RentBikeController;
 import com.hust.group7.ecobikerentalgroup7.Entity.Bike;
