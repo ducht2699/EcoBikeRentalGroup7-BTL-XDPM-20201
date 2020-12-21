@@ -44,12 +44,16 @@ public class StationInfoScreen extends javax.swing.JFrame {
         String sqlGetBikeAvailable = "select * from bikes  where station_id='" + station.getStationId() + "' and status='0'";
         int numbikeAvailable = db.getRow(sqlGetBikeAvailable);
         System.out.println("set model infor");
-        model.setValueAt(station.getName(), 0, 1);
-        model.setValueAt(station.getAddress(), 1, 1);
-        model.setValueAt(station.getDistance()+ " m", 2, 1);
-        model.setValueAt(station.getTime()+" minute", 3, 1);
-        model.setValueAt(station.getNumberOfDocks(), 4, 1);
-        model.setValueAt(numbikeAvailable, 5, 1);
+        model.setValueAt(station.getStationId(), 0, 1);
+        model.setValueAt(station.getName(), 1, 1);
+        model.setValueAt(station.getAddress(), 2, 1);
+        model.setValueAt(station.getNumberOfDocks(), 3, 1);
+        model.setValueAt(station.getDistance()+ " m", 4, 1);
+        model.setValueAt(station.getTime()+ " minutes", 5, 1);
+        model.setValueAt(station.getNumberOfBikes(), 6, 1);
+        model.setValueAt(station.getNumberOfEbikes(), 7, 1);
+        model.setValueAt(station.getNumberOfTwinBikes(), 8, 1);
+        model.setValueAt(station.getNumberOfEmptyDocks(), 9, 1);
         
         stationName.setText(station.getName());
 
@@ -83,13 +87,16 @@ public class StationInfoScreen extends javax.swing.JFrame {
 
         stationInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Name station", null},
+                {"Station Id", null},
+                {"Station Name", null},
                 {"Address", null},
-                {"Area", null},
-                {"Distance to station", null},
-                {"Walking-times", null},
-                {"Number docking point", null},
-                {"Number bike available", null}
+                {"Number Of Docks", null},
+                {"Distance", null},
+                {"Time", null},
+                {"Bikes", null},
+                {"EBikes", null},
+                {"TwinBikes", null},
+                {"Empty Docks", null}
             },
             new String [] {
                 "Name", "Value"
