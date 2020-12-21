@@ -46,4 +46,11 @@ public class StationApi {
         }
         return stations;
     }
+	public static void updateStation(Integer stationId, String stationName, String stationAddress, Integer numberOfDocks, Float distanceToWalk, Float timeToWalk) throws SQLException{
+		 String sqlString = "update stations set name='"+stationName+"', address='"+stationAddress+"', number_of_docks='"+numberOfDocks+"', distance_to_walk='"+distanceToWalk+"', time_to_walk='"+timeToWalk+"' where id="+stationId;
+		 System.out.println(sqlString);
+		 Statement statement = DataBase.connectionStatic.createStatement();
+		 statement.executeUpdate(sqlString, Statement.RETURN_GENERATED_KEYS);
+	     ResultSet rs = statement.getGeneratedKeys();
+	}
 }
