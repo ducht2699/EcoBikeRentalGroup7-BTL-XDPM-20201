@@ -21,7 +21,7 @@ public class DataBase {
     private final String DB_NAME = "tkxdpm?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private final String URL = "jdbc:mysql://localhost:" + PORT + "/" + DB_NAME;
     private final String USER = "root";
-    private final String PASS = "12345678";
+    private final String PASS = "";
     public Connection connection;
     public static Connection connectionStatic;
 

@@ -65,7 +65,7 @@ public class LoginScreen extends javax.swing.JFrame {
             }
         });
 
-        passwordField.setText("hthust");
+        passwordField.setText("nchust");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

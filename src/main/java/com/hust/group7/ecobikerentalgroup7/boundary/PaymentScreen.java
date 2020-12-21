@@ -311,7 +311,7 @@ public class PaymentScreen extends javax.swing.JFrame {
                         String sql = "INSERT INTO transactions (`id`, `bike_id`, `user_id`, `payment_method_id`, `end_time`, `status`, `description`, `deposit`) VALUES (null, "
                                 + bike.getBikeId() + ", "
                                 + user.getUserId() + ", "
-                                + pm.getMethodID() + ", null, 0, '"
+                                + pm.getMethodID() + ", null, 1, '"
                                 + tfDes.getText() + "', "
                                 + deposit + ")";
                         db.insert(sql);

@@ -103,23 +103,23 @@
                   <Data value="Producer"/>
                   <Data value="Battery Percentage"/>
                   <Data value="Load Cycles"/>
-                  <Data value="Time remaining"/>
+                  <Data value="Money count"/>
                   <Data value="Barcode"/>
-                  <Data value="Station"/>
                   <Data value="Status"/>
-                  <Data value="null"/>
+                  <Data value="Station"/>
+                  <Data value="Price"/>
                 </Column>
                 <Column editable="true" title="Value" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>

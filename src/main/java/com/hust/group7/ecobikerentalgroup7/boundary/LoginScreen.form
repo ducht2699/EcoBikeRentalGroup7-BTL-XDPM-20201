@@ -123,7 +123,7 @@
     </Component>
     <Component class="javax.swing.JPasswordField" name="passwordField">
       <Properties>
-        <Property name="text" type="java.lang.String" value="hthust"/>
+        <Property name="text" type="java.lang.String" value="nchust"/>
       </Properties>
     </Component>
   </SubComponents>
