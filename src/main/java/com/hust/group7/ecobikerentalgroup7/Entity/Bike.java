@@ -18,6 +18,19 @@ public class Bike {
 	private String timeRemaining; // Thời gian hết pin (giờ)
     
     public Bike() {}
+    public Bike(String name, String type, float weight, String licensePlate, String manufacuringDate,String producer, String barcode,String bateryPercentage, int stationId, String image){
+    	super();
+    	this.name = name;
+		this.type = type;
+		this.weight = weight;
+		this.licensePlate = licensePlate;
+		this.manufacturingDate = manufacuringDate;
+		this.producer = producer;
+		this.barcode = barcode;
+		this.bateryPercentage = bateryPercentage;
+		this.stationId = stationId;
+		this.image = image;
+    }
 
 	public Bike(int bikeId, String name, String type, float weight, String licensePlate, String manufacturingDate,
 			String producer, String barcode, int status, int stationId, String image, Cost cost,
@@ -39,6 +52,7 @@ public class Bike {
 		this.loadCycles = loadCycles;
 		this.timeRemaining = timeRemaining;
 	}
+
 
 	public int getBikeId() {
 		return bikeId;
