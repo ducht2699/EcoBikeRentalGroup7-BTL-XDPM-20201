@@ -10,7 +10,7 @@ import com.hust.group7.ecobikerentalgroup7.Entity.User;
 import com.hust.group7.ecobikerentalgroup7.MainEntry;
 import com.hust.group7.ecobikerentalgroup7.boundary.HomeScreen;
 import com.hust.group7.ecobikerentalgroup7.boundary.admin.AdminHomeScreen;
-import com.hust.group7.ecobikerentalgroup7.boundary.ScanCodeScreen;
+import com.hust.group7.ecobikerentalgroup7.boundary.EnterCodeScreen;
 import com.hust.group7.ecobikerentalgroup7.boundary.SignUpScreen;
 import java.util.logging.Level;
 import java.util.logging.Logger;

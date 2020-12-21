@@ -7,7 +7,7 @@ package com.hust.group11.ecobikerentalgroup11.controller;
 
 import com.hust.group7.ecobikerentalgroup7.controller.RentBikeController;
 import com.hust.group7.ecobikerentalgroup7.Entity.Bike;
-import com.hust.group7.ecobikerentalgroup7.boundary.ScanCodeScreen;
+import com.hust.group7.ecobikerentalgroup7.boundary.EnterCodeScreen;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;

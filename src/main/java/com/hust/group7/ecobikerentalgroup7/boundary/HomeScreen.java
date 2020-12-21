@@ -103,7 +103,7 @@ public class HomeScreen extends javax.swing.JFrame {
         imageCodePanel = new com.hust.group7.ecobikerentalgroup7.boundary.ImageCodePanel();
         findStationButton = new javax.swing.JButton();
         rentingButton = new javax.swing.JButton();
-        rentBikeButton = new javax.swing.JButton();
+        btnEnterCode = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Home");
@@ -151,10 +151,10 @@ public class HomeScreen extends javax.swing.JFrame {
             }
         });
 
-        rentBikeButton.setText("Rent bike");
-        rentBikeButton.addActionListener(new java.awt.event.ActionListener() {
+        btnEnterCode.setText("Enter bike code");
+        btnEnterCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rentBikeButtonActionPerformed(evt);
+                btnEnterCodeActionPerformed(evt);
             }
         });
 
@@ -184,8 +184,8 @@ public class HomeScreen extends javax.swing.JFrame {
                         .addGap(47, 47, 47)
                         .addComponent(rentingButton)
                         .addGap(40, 40, 40)
-                        .addComponent(rentBikeButton)))
-                .addContainerGap(197, Short.MAX_VALUE))
+                        .addComponent(btnEnterCode)))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,7 +203,7 @@ public class HomeScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(findStationButton)
                     .addComponent(rentingButton)
-                    .addComponent(rentBikeButton))
+                    .addComponent(btnEnterCode))
                 .addGap(27, 27, 27)
                 .addComponent(imageCodePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(80, Short.MAX_VALUE))
@@ -225,19 +225,18 @@ public class HomeScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_rentingButtonActionPerformed
 
-    private void rentBikeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentBikeButtonActionPerformed
-//        try {
-//            if (user.getStatus() == Constants.USER_AVAIL) {
-//                ScanCodeScreen scs = new ScanCodeScreen(user, this);
-//                MainEntry.move(this, scs);
-//            } else {
-//                ScanCodeScreen scs = new ScanCodeScreen(transaction, bike, user, this);
-//                MainEntry.move(this, scs);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }//GEN-LAST:event_rentBikeButtonActionPerformed
+    private void btnEnterCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterCodeActionPerformed
+        try {
+            if (user.getStatus() == 0) {
+                EnterCodeScreen scs = new EnterCodeScreen(user, transaction, this);
+                MainEntry.move(this, scs);
+            } else {
+                JOptionPane.showMessageDialog(this, "Can't rent more bike!");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnEnterCodeActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         int confirm = JOptionPane.showConfirmDialog(this, "Are you sure");
@@ -257,12 +256,12 @@ public class HomeScreen extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEnterCode;
     private javax.swing.JButton findStationButton;
     private com.hust.group7.ecobikerentalgroup7.boundary.ImageCodePanel imageCodePanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton logoutButton;
-    private javax.swing.JButton rentBikeButton;
     private javax.swing.JButton rentingButton;
     private javax.swing.JLabel statusLabel;
     private javax.swing.JLabel usernameLabel;
