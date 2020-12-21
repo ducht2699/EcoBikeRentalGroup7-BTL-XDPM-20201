@@ -53,4 +53,12 @@ public class StationApi {
 		 statement.executeUpdate(sqlString, Statement.RETURN_GENERATED_KEYS);
 	     ResultSet rs = statement.getGeneratedKeys();
 	}
+	
+	public static void addStation(Integer stationId, String stationName, String stationAddress, Integer numberOfDocks, Float distanceToWalk, Float timeToWalk) throws SQLException{
+		 String sqlString = "insert into stations values ('"+stationId+"','"+stationName+"','"+stationAddress+"','"+numberOfDocks+"','"+distanceToWalk+"','"+timeToWalk;
+		 System.out.println(sqlString);
+		 Statement statement = DataBase.connectionStatic.createStatement();
+		 statement.executeUpdate(sqlString, Statement.RETURN_GENERATED_KEYS);
+	     ResultSet rs = statement.getGeneratedKeys();
+	}
 }
