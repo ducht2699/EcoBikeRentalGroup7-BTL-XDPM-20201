@@ -254,7 +254,14 @@ private void sortTable() {
                     passBike = b;
                 }
             });
-            MainEntry.move(this, new RentBikeScreen(user, passBike, backScreen));
+            if (user.getStatus() == 1) {
+                JOptionPane.showMessageDialog(this, "Can't rent more bike!");
+            } else if (passBike.getStatus() == 0 && user.getStatus() == 0) {
+                MainEntry.move(this, new RentBikeScreen(user, passBike, backScreen));
+            } else {
+                JOptionPane.showMessageDialog(this, "Bike rented. Choose another!");
+            }
+            
         }
     }//GEN-LAST:event_rentBikeBtnActionPerformed
 

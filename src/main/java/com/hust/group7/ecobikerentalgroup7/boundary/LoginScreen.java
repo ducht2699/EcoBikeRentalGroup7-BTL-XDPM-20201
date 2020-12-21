@@ -46,7 +46,7 @@ public class LoginScreen extends javax.swing.JFrame {
 
         passwordLabel.setText("Password");
 
-        usernameField.setText("ducht");
+        usernameField.setText("luatnc");
 
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {

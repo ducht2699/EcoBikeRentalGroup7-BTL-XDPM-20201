@@ -112,7 +112,7 @@ public class RentingScreen extends javax.swing.JFrame {
                 0, // run first occurrence immediatetly
                 1000);
         System.out.println(System.getProperty("user.dir") + bike.getImage());
-        imageCodePanel.showImage(new File(bike.getImage()));
+        imageCodePanel.showImage(new File(this.bike.getImage()));
         imageCodePanel.repaint();
     }
 
