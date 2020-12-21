@@ -11,6 +11,7 @@ import com.hust.group7.ecobikerentalgroup7.Entity.Bike;
 import com.hust.group7.ecobikerentalgroup7.Entity.Transaction;
 import com.hust.group7.ecobikerentalgroup7.Entity.User;
 import com.hust.group7.ecobikerentalgroup7.MainEntry;
+import static com.hust.group7.ecobikerentalgroup7.boundary.HomeScreen.user;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -183,9 +184,16 @@ public class RentingScreen extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(rentingBikeTable);
@@ -276,36 +284,16 @@ public class RentingScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
-        //set bike status
-        String sql = "UPDATE bikes SET status = 0 WHERE id = " + bike.getBikeId();
-        try {
-            db.update(sql);
-            //set user status
-            sql = "UPDATE users SET status = 0 WHERE id = " + user.getUserId();
-            db.update(sql);
-            //set endtime transactions, set deposit
-            sql = "UPDATE `tkxdpm`.`transactions` SET `end_time` = '" + transaction.getEndTime() + "', `deposit` = '" + money + "'"
-                    + ", `status` = 0 WHERE (`id` = '" + transaction.getTransactionId() + "')";
-            db.update(sql);
-            //return money account
-            sql = "SELECT * FROM \n"
-                    + "transactions t INNER JOIN payment_methods pm ON t.payment_method_id = pm.payment_id\n"
-                    + "INNER JOIN virtual_accounts va ON va.account_id = pm.virtual_account_id\n"
-                    + " WHERE t.id = " + transaction.getTransactionId();
-            ResultSet rs = db.query(sql);
-            rs.next();
 
-            float moneyReturn = rs.getFloat("amount_money") + transaction.getDeposit() - this.money;
-            System.out.println(rs.getFloat("amount_money") + "---" + transaction.getDeposit() + "====" + this.money);
-            sql = "UPDATE virtual_accounts SET amount_money = " + moneyReturn + " WHERE account_id = " + rs.getInt("account_id");
-            db.update(sql);
-            //notify
-            JOptionPane.showMessageDialog(this, "Returned!");
-            user.setStatus(0);
-            MainEntry.move(this, new HomeScreen(this.user, new LoginScreen()));
+        try {
+
+            EnterStationScreen scs = new EnterStationScreen(transaction, user, bike, backScreen, this.money);
+            MainEntry.move(this, scs);
+
         } catch (SQLException ex) {
-            Logger.getLogger(RentingScreen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HomeScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
+
 
     }//GEN-LAST:event_returnButtonActionPerformed
 

@@ -189,7 +189,7 @@ public class AdminAddBike extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -208,14 +208,10 @@ public class AdminAddBike extends javax.swing.JFrame {
                             .addComponent(tfWeight, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel12))
-                                .addGap(178, 178, 178))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addContainerGap())))))
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel3))
+                        .addGap(178, 178, 178))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(117, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -242,10 +238,9 @@ public class AdminAddBike extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tfName, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(tfBarcode, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                        .addComponent(cbbBikeType, 0, 1, Short.MAX_VALUE)
-                        .addComponent(tfBattery)))
+                    .addComponent(tfBarcode, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                    .addComponent(cbbBikeType, 0, 1, Short.MAX_VALUE)
+                    .addComponent(tfBattery))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -254,12 +249,13 @@ public class AdminAddBike extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(cbbStation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3)))
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(cbbStation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -304,6 +300,7 @@ public class AdminAddBike extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnAddBikeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBikeActionPerformed
+
         DateFormat fm = new SimpleDateFormat("yyyy/MM/dd");
 
         String station = cbbStation.getSelectedItem().toString();
@@ -317,40 +314,55 @@ public class AdminAddBike extends javax.swing.JFrame {
                 barCode = tfBarcode.getText(),
                 manufacturingDate = fm.format(dcManufacturingDate.getDate());
 
-        //add Bike
-        String sql = "INSERT INTO `bikes` (`id`, `name`, `type`, `weight`, `license_plate`, `manuafacturing_date`, `producer`, `batery_percentage`, `load_cycles`, `time_remaining`, `barcode`,`status`, `station_id`, `image`) VALUES\n"
-                + "(null, '" + name
-                + "','" + bikeType
-                + "',' " + weight
-                + "', '" + plateLiscense
-                + "', '" + manufacturingDate
-                + "', '" + producer
-                + "', '" + battery
-                + "',null, null, '" + barCode
-                + "', 0,'" + getStationIDByName(station)
-                + "', '" + imageName + "')";
-        try {
-            db.insert(sql);
-            JOptionPane.showMessageDialog(this, "Inserted!");
-            // -------------------
-            String sqlString = "select * from stations where name= '" + station + "';";
-            ResultSet rs = db.query(sqlString);
-            Station stationBack = new Station();
-            while (rs.next()) {
+        for (Station x : arrStation) {
+            if (x.getName().equals(station)) {
+                String sqlGetBikeAvailable = "select * from bikes  where station_id='" + x.getStationId() + "' and status='0'";
+                try {
+                    int numbikeAvailable = db.getRow(sqlGetBikeAvailable);
+                    if (numbikeAvailable == x.getNumberOfDocks()) {
+                        //add Bike
+                        String sql = "INSERT INTO `bikes` (`id`, `name`, `type`, `weight`, `license_plate`, `manuafacturing_date`, `producer`, `batery_percentage`, `load_cycles`, `time_remaining`, `barcode`,`status`, `station_id`, `image`) VALUES\n"
+                                + "(null, '" + name
+                                + "','" + bikeType
+                                + "',' " + weight
+                                + "', '" + plateLiscense
+                                + "', '" + manufacturingDate
+                                + "', '" + producer
+                                + "', '" + battery
+                                + "',null, null, '" + barCode
+                                + "', 0,'" + getStationIDByName(station)
+                                + "', '" + imageName + "')";
+                        try {
+                            db.insert(sql);
+                            JOptionPane.showMessageDialog(this, "Inserted!");
+                            // -------------------
+                            String sqlString = "select * from stations where name= '" + station + "';";
+                            ResultSet rs = db.query(sqlString);
+                            Station stationBack = new Station();
+                            while (rs.next()) {
 
-                stationBack.setAddress(rs.getString("address"));
-                stationBack.setStationId(rs.getInt("id"));
-                stationBack.setName(rs.getString("name"));
-                stationBack.setDistance(rs.getInt("distance_to_walk"));
+                                stationBack.setAddress(rs.getString("address"));
+                                stationBack.setStationId(rs.getInt("id"));
+                                stationBack.setName(rs.getString("name"));
+                                stationBack.setDistance(rs.getInt("distance_to_walk"));
 
-            }
+                            }
 
-            // ---------------
-            MainEntry.move(this, new AdminManageBikes(new AdminHomeScreen(user, null), user, stationBack));
+                            // ---------------
+                            MainEntry.move(this, new AdminManageBikes(new AdminHomeScreen(user, null), user, stationBack));
 //            showInfoTable();
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminAddStation.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(AdminAddStation.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Full position, choose another");
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdminAddBike.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
+
     }//GEN-LAST:event_btnAddBikeActionPerformed
 
     private void btnAddBikeImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBikeImageActionPerformed
