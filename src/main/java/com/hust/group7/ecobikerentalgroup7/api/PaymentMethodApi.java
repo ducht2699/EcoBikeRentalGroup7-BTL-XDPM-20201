@@ -13,13 +13,16 @@ import com.hust.group7.ecobikerentalgroup7.Entity.PaymentMethod;
 import com.hust.group7.ecobikerentalgroup7.boundary.AddPayentMethodScreen;
 
 public class PaymentMethodApi {
-	public ArrayList<PaymentMethod> getAllPaymentMethods() throws SQLException {
+	public static ArrayList<PaymentMethod> getAllPaymentMethods() throws SQLException {
 		Statement statement = DataBase.connectionStatic.createStatement();
 		ArrayList<PaymentMethod> paymentMethods = new ArrayList<PaymentMethod>();
-		String sqlString = "select * from payment_method";
+		String sqlString = "select * from payment_methods";
 		ResultSet rs = statement.executeQuery(sqlString);
 		while (rs.next()) {
-			PaymentMethod paymentMethod = new PaymentMethod(rs.getInt("id"), rs.getString("cardholder_name"),rs.getString("card_number"), rs.getString("issuing_bank"), rs.getString("expiration_date"), rs.getInt("security_code"), rs.getFloat("remaining_amount"),rs.getInt("virtual_acount_id") , rs.getInt("user_id"));
+			PaymentMethod paymentMethod = new PaymentMethod();
+			paymentMethod.setMethodID(rs.getInt("payment_id"));
+			paymentMethod.setMethodID(rs.getInt("virtual_account_id"));
+			paymentMethod.setMethodID(rs.getInt("user_id"));
 			paymentMethods.add(paymentMethod);
 		}
 		return paymentMethods;
