@@ -26,16 +26,7 @@ class PaymentMethodApiTest {
 		// TODO Auto-generated constructor stub
 		db = new DataBase();
 	}
-	 @BeforeAll
-	    public static void setUpClass() {
-	        System.out.println("------BEFORE ALL----");
-	    }
-	    
-	    @AfterAll
-	    public static void tearDownClass() {
-	        System.out.println("------AFTER ALL----");
-	    }
-	    
+
 	    
 
 	    @BeforeEach
@@ -71,9 +62,12 @@ class PaymentMethodApiTest {
 		System.out.println("TEST ADD PAYMENT METHOD");
 		int currentSize = getCurCount();
 		int afterAdd = addMethod("Vietinbank", "123456789", "HOANG TRUNG DUC", 123, "2025-10-10", 1);
+		int afterAddFalse = addMethod("Vieinbank", "123456789", "HOANG TRUNG DUC", 123, "2025-10-10", 1);
 		System.out.println("first : "+ currentSize);
-		System.out.println("method after: "+ afterAdd);
-		assertTrue("Eror in add bike API!", afterAdd == (currentSize +1));
+		System.out.println("method after add 1: "+ afterAdd);
+		System.out.println("method after add 2: "+ afterAddFalse);
+		assertTrue("Eror in add payment method API!", afterAdd == (currentSize +1));
+		assertTrue("Eror in add payment method API!", afterAddFalse == (currentSize + 1));
         
 	}
 
