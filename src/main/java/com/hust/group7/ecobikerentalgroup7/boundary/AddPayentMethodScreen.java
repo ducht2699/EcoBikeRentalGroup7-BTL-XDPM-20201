@@ -7,6 +7,7 @@ package com.hust.group7.ecobikerentalgroup7.boundary;
 
 import com.hust.group7.ecobikerentalgroup7.DataBase;
 import com.hust.group7.ecobikerentalgroup7.Entity.User;
+import com.hust.group7.ecobikerentalgroup7.api.PaymentMethodApi;
 import com.hust.group7.ecobikerentalgroup7.MainEntry;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -171,26 +172,22 @@ public class AddPayentMethodScreen extends javax.swing.JFrame {
         String nameOwner = nameOwnerField.getText();
         int cvvCode = Integer.valueOf(cvvCodeField.getText());
         String dateExpired = dateExpiredField.getText();
-        try {
-            String sqlString = "SELECT * FROM virtual_accounts";
-            ResultSet rs = db.query(sqlString);
-            while (rs.next()) {
-                if (issuingBank.equals(rs.getString("issuing_bank"))
-                        && cardCode.equals(rs.getString("card_number"))
-                        && nameOwner.equals(rs.getString("card_holder_name"))
-                        && cvvCode == rs.getInt("cvv")
-                        && dateExpired.equals(rs.getDate("expiration_date").toString())) {
-                    sqlString = "insert into payment_methods values (null, " + rs.getInt("account_id") + ", " + user.getUserId() + ")";
-                    db.insert(sqlString);
-                    JOptionPane.showMessageDialog(this, "Successfully added!");
-                    MainEntry.move(this, backScreen);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Failed!" + dateExpired.equals(rs.getDate("expiration_date")));
-                }
-            }
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
+        
+        boolean check = false;
+		try {
+			check = PaymentMethodApi.addPaymentMethod(issuingBank, cardCode, nameOwner, cvvCode, dateExpired, user.getUserId());
+			if (check) {
+	        	JOptionPane.showMessageDialog(this, "Successfully added!");
+	            MainEntry.move(this, backScreen);
+			} else {
+				JOptionPane.showMessageDialog(this, "Failed!");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        
     }//GEN-LAST:event_addMethodActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
