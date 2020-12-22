@@ -10,6 +10,8 @@ import com.hust.group7.ecobikerentalgroup7.Entity.Bike;
 import com.hust.group7.ecobikerentalgroup7.Entity.Station;
 import com.hust.group7.ecobikerentalgroup7.Entity.User;
 import com.hust.group7.ecobikerentalgroup7.MainEntry;
+import com.hust.group7.ecobikerentalgroup7.boundary.HomeScreen;
+import com.hust.group7.ecobikerentalgroup7.boundary.LoginScreen;
 import com.hust.group7.ecobikerentalgroup7.boundary.ViewListBikeScreen;
 import com.hust.group7.ecobikerentalgroup7.boundary.ViewListBikeScreen;
 import java.io.File;
@@ -226,7 +228,11 @@ public class AdminEditBikes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        MainEntry.move(this, backScreen);
+        try {
+            MainEntry.move(this, new AdminManageBikes(new HomeScreen(user, new LoginScreen()), user, station));
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminEditBikes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed

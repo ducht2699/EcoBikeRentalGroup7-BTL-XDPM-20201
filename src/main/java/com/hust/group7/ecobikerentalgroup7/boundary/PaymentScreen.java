@@ -349,7 +349,7 @@ public class PaymentScreen extends javax.swing.JFrame {
 
     private void handleMoveToAddPaymentMethodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_handleMoveToAddPaymentMethodActionPerformed
         try {
-            AddPayentMethodScreen addPayentMethodScreen = new AddPayentMethodScreen(user, this);
+            AddPayentMethodScreen addPayentMethodScreen = new AddPayentMethodScreen(user, bike, this);
             MainEntry.move(this, addPayentMethodScreen);
         } catch (SQLException ex) {
             Logger.getLogger(PaymentScreen.class.getName()).log(Level.SEVERE, null, ex);

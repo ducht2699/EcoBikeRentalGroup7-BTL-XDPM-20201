@@ -317,48 +317,39 @@ public class AdminAddBike extends javax.swing.JFrame {
         for (Station x : arrStation) {
             if (x.getName().equals(station)) {
                 String sqlGetBikeAvailable = "select * from bikes  where station_id='" + x.getStationId() + "' and status='0'";
+                //add Bike
+                String sql = "INSERT INTO `bikes` (`id`, `name`, `type`, `weight`, `license_plate`, `manuafacturing_date`, `producer`, `batery_percentage`, `load_cycles`, `time_remaining`, `barcode`,`status`, `station_id`, `image`) VALUES\n"
+                        + "(null, '" + name
+                        + "','" + bikeType
+                        + "',' " + weight
+                        + "', '" + plateLiscense
+                        + "', '" + manufacturingDate
+                        + "', '" + producer
+                        + "', '" + battery
+                        + "',null, null, '" + barCode
+                        + "', 0,'" + getStationIDByName(station)
+                        + "', '" + imageName + "')";
                 try {
-                    int numbikeAvailable = db.getRow(sqlGetBikeAvailable);
-                    if (numbikeAvailable == x.getNumberOfDocks()) {
-                        //add Bike
-                        String sql = "INSERT INTO `bikes` (`id`, `name`, `type`, `weight`, `license_plate`, `manuafacturing_date`, `producer`, `batery_percentage`, `load_cycles`, `time_remaining`, `barcode`,`status`, `station_id`, `image`) VALUES\n"
-                                + "(null, '" + name
-                                + "','" + bikeType
-                                + "',' " + weight
-                                + "', '" + plateLiscense
-                                + "', '" + manufacturingDate
-                                + "', '" + producer
-                                + "', '" + battery
-                                + "',null, null, '" + barCode
-                                + "', 0,'" + getStationIDByName(station)
-                                + "', '" + imageName + "')";
-                        try {
-                            db.insert(sql);
-                            JOptionPane.showMessageDialog(this, "Inserted!");
-                            // -------------------
-                            String sqlString = "select * from stations where name= '" + station + "';";
-                            ResultSet rs = db.query(sqlString);
-                            Station stationBack = new Station();
-                            while (rs.next()) {
-
-                                stationBack.setAddress(rs.getString("address"));
-                                stationBack.setStationId(rs.getInt("id"));
-                                stationBack.setName(rs.getString("name"));
-                                stationBack.setDistance(rs.getInt("distance_to_walk"));
-
-                            }
-
-                            // ---------------
-                            MainEntry.move(this, new AdminManageBikes(new AdminHomeScreen(user, null), user, stationBack));
-//            showInfoTable();
-                        } catch (SQLException ex) {
-                            Logger.getLogger(AdminAddStation.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Full position, choose another");
+                    db.insert(sql);
+                    JOptionPane.showMessageDialog(this, "Inserted!");
+                    // -------------------
+                    String sqlString = "select * from stations where name= '" + station + "';";
+                    ResultSet rs = db.query(sqlString);
+                    Station stationBack = new Station();
+                    while (rs.next()) {
+                        
+                        stationBack.setAddress(rs.getString("address"));
+                        stationBack.setStationId(rs.getInt("id"));
+                        stationBack.setName(rs.getString("name"));
+                        stationBack.setDistance(rs.getInt("distance_to_walk"));
+                        
                     }
+                    
+                    // ---------------
+                    MainEntry.move(this, new AdminManageBikes(new AdminHomeScreen(user, null), user, stationBack));
+//            showInfoTable();
                 } catch (SQLException ex) {
-                    Logger.getLogger(AdminAddBike.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AdminAddStation.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }

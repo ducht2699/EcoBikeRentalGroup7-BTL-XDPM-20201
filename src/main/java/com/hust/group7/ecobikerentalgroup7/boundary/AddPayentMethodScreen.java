@@ -6,11 +6,14 @@
 package com.hust.group7.ecobikerentalgroup7.boundary;
 
 import com.hust.group7.ecobikerentalgroup7.DataBase;
+import com.hust.group7.ecobikerentalgroup7.Entity.Bike;
 import com.hust.group7.ecobikerentalgroup7.Entity.User;
 import com.hust.group7.ecobikerentalgroup7.api.PaymentMethodApi;
 import com.hust.group7.ecobikerentalgroup7.MainEntry;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -22,10 +25,12 @@ public class AddPayentMethodScreen extends javax.swing.JFrame {
     private DataBase db;
     JFrame backScreen;
     private User user;
-
-    public AddPayentMethodScreen(User user, JFrame backScreen) throws SQLException {
+    private Bike bike;
+    
+    public AddPayentMethodScreen(User user, Bike bike, JFrame backScreen) throws SQLException {
         initComponents();
         db = new DataBase();
+        this.bike = bike;
         this.user = user;
         this.backScreen = backScreen;
     }
@@ -178,14 +183,16 @@ public class AddPayentMethodScreen extends javax.swing.JFrame {
 			check = PaymentMethodApi.addPaymentMethod(issuingBank, cardCode, nameOwner, cvvCode, dateExpired, user.getUserId());
 			if (check) {
 	        	JOptionPane.showMessageDialog(this, "Successfully added!");
-	            MainEntry.move(this, backScreen);
+	            MainEntry.move(this, new PaymentScreen(user, this.bike, new HomeScreen(user, new LoginScreen())));
 			} else {
 				JOptionPane.showMessageDialog(this, "Failed!");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} catch (Exception ex) {
+            Logger.getLogger(AddPayentMethodScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
     }//GEN-LAST:event_addMethodActionPerformed

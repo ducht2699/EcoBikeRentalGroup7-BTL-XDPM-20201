@@ -109,7 +109,7 @@ public class ViewListBikeScreen extends javax.swing.JFrame {
 
         jLabel1.setText("Choice bike type:");
 
-        filterComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Single Bike", "Double Bike", "Electric Bike" }));
+        filterComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Bike", "Twin Bike", "EBike" }));
 
         rentBikeBtn.setText("Rent bike");
         rentBikeBtn.addActionListener(new java.awt.event.ActionListener() {
